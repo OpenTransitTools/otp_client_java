@@ -1,9 +1,14 @@
 <project name="TripPlannerWS" basedir="." default="main">
+    <property name="main-class"  value="oata.HelloWorld"/>
     <property name="src.dir"     value="src"/>
     <property name="build.dir"   value="build"/>
     <property name="classes.dir" value="${build.dir}/classes"/>
     <property name="jar.dir"     value="${build.dir}/jar"/>
-    <property name="main-class"  value="oata.HelloWorld"/>
+    <property name="lib.dir"     value="lib"/>
+
+    <path id="classpath">
+        <fileset dir="${lib.dir}" includes="**/*.jar"/>
+    </path>
 
     <target name="clean">
         <delete dir="${build.dir}"/>
