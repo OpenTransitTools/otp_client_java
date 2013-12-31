@@ -18,7 +18,7 @@ public class TripPlan
         private String m_maxHours;
         private String m_mode;
         private String m_arriveBy;
-        private String m_maxWalkDinstance;
+        private String m_maxWalkDistance;
         private String m_fromPlace;
         private String m_toPlace;
 
@@ -34,8 +34,8 @@ public class TripPlan
         public void setMode(String mode) {m_mode = mode;}
         public String getArriveBy() {return m_arriveBy;}
         public void setArriveBy(String arriveBy) {m_arriveBy = arriveBy;}
-        public String getMaxWalkDinstance() {return m_maxWalkDinstance;}
-        public void setMaxWalkDinstance(String maxWalkDinstance) {m_maxWalkDinstance = maxWalkDinstance;}
+        public String getMaxWalkDistance() {return m_maxWalkDistance;}
+        public void setMaxWalkDistance(String maxWalkDinstance) {m_maxWalkDistance = maxWalkDinstance;}
         public String getFromPlace() {return m_fromPlace;}
         public void setFromPlace(String fromPlace) {m_fromPlace = fromPlace;}
         public String getToPlace() {return m_toPlace;}
