@@ -1,5 +1,7 @@
 package com.opentransittools.client.java;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class TripPlan
 {
@@ -10,36 +12,27 @@ public class TripPlan
      * "requestParameters":{"optimize":"QUICK","time":"10:15pm","arriveBy":"false","maxWalkDistance":"840.0","fromPlace":"834 SE LA MBERT ST, PORTLAND::45.468384,-122.65718","toPlace":"Art Museum, Portland (Stop ID 6493)::45.516304,-122.68399","date":"2013 -12-20","maxHours":"6","mode":"WALK"},
      * @author purcellf
      */
+    //@JsonIgnoreProperties(ignoreUnknown = true)
     public static class RequestParameters
     {
+        @JsonProperty("time")
         private String m_time;
-        private String m_optimize;
+        @JsonProperty("date")
         private String m_date;
+        @JsonProperty("optimize")
+        private String m_optimize;
+        @JsonProperty("maxHours")
         private String m_maxHours;
+        @JsonProperty("mode")
         private String m_mode;
+        @JsonProperty("arriveBy")
         private String m_arriveBy;
+        @JsonProperty("maxWalkDistance")
         private String m_maxWalkDistance;
+        @JsonProperty("fromPlace")
         private String m_fromPlace;
+        @JsonProperty("toPlace")
         private String m_toPlace;
-
-        public String getTime() {return m_time;}
-        public void setTime(String time) {m_time = time; }
-        public String getOptimize() {return m_optimize;}
-        public void setOptimize(String optimize) {m_optimize = optimize;}
-        public String getDate() {return m_date;}
-        public void setDate(String date) {m_date = date;}
-        public String getMaxHours() {return m_maxHours;}
-        public void setMaxHours(String maxHours) {m_maxHours = maxHours;}
-        public String getMode() {return m_mode;}
-        public void setMode(String mode) {m_mode = mode;}
-        public String getArriveBy() {return m_arriveBy;}
-        public void setArriveBy(String arriveBy) {m_arriveBy = arriveBy;}
-        public String getMaxWalkDistance() {return m_maxWalkDistance;}
-        public void setMaxWalkDistance(String maxWalkDinstance) {m_maxWalkDistance = maxWalkDinstance;}
-        public String getFromPlace() {return m_fromPlace;}
-        public void setFromPlace(String fromPlace) {m_fromPlace = fromPlace;}
-        public String getToPlace() {return m_toPlace;}
-        public void setToPlace(String toPlace) {m_toPlace = toPlace;}
     }
     public RequestParameters getRequestParameters() {return m_requestParameters;}
     public void setRequestParameters(RequestParameters requestParameters) {m_requestParameters = requestParameters;}
