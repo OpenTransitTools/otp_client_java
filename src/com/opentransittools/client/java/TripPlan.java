@@ -67,8 +67,24 @@ public class TripPlan
      */
     public static class Plan
     {
+        @JsonProperty("date")
+        public String date;
+
         @JsonProperty("from")
         public From from;
+        @JsonProperty("to")
+        public To to;
+
+        @JsonProperty("itineraries")
+        public Itineraries itineraries[];
+
+        public static class To
+        {
+        }
+
+        public static class Itineraries
+        {
+        }
 
         public static class From
         {
