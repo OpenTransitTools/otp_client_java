@@ -78,18 +78,58 @@ public class TripPlan
         @JsonProperty("itineraries")
         public Itineraries itineraries[];
 
+        @JsonIgnoreProperties({"geometry"})
         public static class To
         {
+            @JsonProperty("name")
+            public String name;
+
+            @JsonProperty("lon")
+            public Double lon;
+            @JsonProperty("lat")
+            public Double lat;
+
+            @JsonProperty("stopId")
+            public String stopId;
+            @JsonProperty("stopCode")
+            public String stopCode;
+            @JsonProperty("arrival")
+            public String arrival;
+            @JsonProperty("departure")
+            public String departure;
+            @JsonProperty("orig")
+            public String orig;
+            @JsonProperty("zoneId")
+            public String zoneId;
         }
 
-        public static class Itineraries
-        {
-        }
-
+        @JsonIgnoreProperties({"geometry"})
         public static class From
         {
             @JsonProperty("name")
             public String name;
+            @JsonProperty("lon")
+            public Double lon;
+            @JsonProperty("lat")
+            public Double lat;
+
+            @JsonProperty("stopId")
+            public String stopId;
+            @JsonProperty("stopCode")
+            public String stopCode;
+            @JsonProperty("arrival")
+            public String arrival;
+            @JsonProperty("departure")
+            public String departure;
+            @JsonProperty("orig")
+            public String orig;
+            @JsonProperty("zoneId")
+            public String zoneId;
+        }
+
+
+        public static class Itineraries
+        {
         }
     }
 }

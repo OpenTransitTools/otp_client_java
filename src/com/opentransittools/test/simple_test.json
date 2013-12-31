@@ -4,7 +4,7 @@
      {
              "date":1387848986000,
              "from":{"name":"834 SE LA MBERT ST, PORTLAND"},
-
+             "to":{"name":"Art Museum, Portland (Stop ID 6493)","stopId":null,"stopCode":null,"lon":-122.68399,"lat":45.516304,"arrival":null,"departure":null,"orig":null,"zoneId":null,"geometry":"{\"type\": \"Point\", \"coordinates\": [-122.68399,45.516304]}"},
              "itineraries":[]
      }
 }
