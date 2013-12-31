@@ -5,37 +5,37 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class TripPlan
 {
-    private RequestParameters m_requestParameters;
-    private Plan m_plan;
+    @JsonProperty("requestParameters")
+    public RequestParameters requestParameters;
+    @JsonProperty("plan")
+    public Plan plan;
 
     /** 
      * "requestParameters":{"optimize":"QUICK","time":"10:15pm","arriveBy":"false","maxWalkDistance":"840.0","fromPlace":"834 SE LA MBERT ST, PORTLAND::45.468384,-122.65718","toPlace":"Art Museum, Portland (Stop ID 6493)::45.516304,-122.68399","date":"2013 -12-20","maxHours":"6","mode":"WALK"},
      * @author purcellf
      */
-    //@JsonIgnoreProperties(ignoreUnknown = true)
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class RequestParameters
     {
         @JsonProperty("time")
-        private String m_time;
+        public String time;
         @JsonProperty("date")
-        private String m_date;
+        public String date;
         @JsonProperty("optimize")
-        private String m_optimize;
+        public String optimize;
         @JsonProperty("maxHours")
-        private String m_maxHours;
+        public String maxHours;
         @JsonProperty("mode")
-        private String m_mode;
+        public String mode;
         @JsonProperty("arriveBy")
-        private String m_arriveBy;
+        public String arriveBy;
         @JsonProperty("maxWalkDistance")
-        private String m_maxWalkDistance;
+        public String maxWalkDistance;
         @JsonProperty("fromPlace")
-        private String m_fromPlace;
+        public String fromPlace;
         @JsonProperty("toPlace")
-        private String m_toPlace;
+        public String toPlace;
     }
-    public RequestParameters getRequestParameters() {return m_requestParameters;}
-    public void setRequestParameters(RequestParameters requestParameters) {m_requestParameters = requestParameters;}
 
     /**
      *        "plan":{"date":1387848986000,
@@ -67,18 +67,13 @@ public class TripPlan
      */
     public static class Plan
     {
-        private From m_from;
+        @JsonProperty("from")
+        public From from;
 
         public static class From
         {
-            private String m_name;
-            public  String getName() { return m_name; }
-            public  void   setName(String n) { m_name = n; }
+            @JsonProperty("name")
+            public String name;
         }
-        public From getFrom() {return m_from;          }
-        public void setFrom(From from) {m_from = from; }
-
     }
-    public Plan getPlan() {return m_plan;    }
-    public void setPlan(Plan plan) {m_plan = plan;    }
 }

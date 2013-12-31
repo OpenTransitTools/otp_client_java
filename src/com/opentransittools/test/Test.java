@@ -26,6 +26,6 @@ public class Test
 
         ObjectMapper mapper = new ObjectMapper();
         TripPlan p = mapper.readValue(new File(file), TripPlan.class);
-        System.out.print(p.getPlan().getFrom().getName());
+        System.out.print(p.plan.from.name);
    }
 }
