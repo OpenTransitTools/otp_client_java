@@ -4,7 +4,7 @@
 COMMIT_EDITMSG
 .git/
 .git/*
-
+.classpath
 # C extensions
 *.so
 

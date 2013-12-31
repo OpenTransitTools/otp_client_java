@@ -1,13 +1,14 @@
 <project name="TripPlannerWS" basedir="." default="main">
-    <property name="main-class"  value="oata.HelloWorld"/>
+    <property name="main-class"  value="com.opentransittools.test.Test"/>
     <property name="src.dir"     value="src"/>
     <property name="build.dir"   value="build"/>
+    <property name="lib.dir"     value="lib"/>
     <property name="classes.dir" value="${build.dir}/classes"/>
     <property name="jar.dir"     value="${build.dir}/jar"/>
-    <property name="lib.dir"     value="lib"/>
 
     <path id="classpath">
         <fileset dir="${lib.dir}" includes="**/*.jar"/>
+        <dirset  dir="${classes.dir}"/>
     </path>
 
     <target name="clean">
@@ -16,7 +17,9 @@
 
     <target name="compile">
         <mkdir dir="${classes.dir}"/>
-        <javac srcdir="${src.dir}" destdir="${classes.dir}"/>
+        <javac srcdir="${src.dir}" destdir="${classes.dir}">
+            <classpath refid="classpath"/>
+        </javac>
     </target>
 
     <target name="jar" depends="compile">
@@ -29,7 +32,14 @@
     </target>
 
     <target name="run" depends="jar">
-        <java jar="${jar.dir}/${ant.project.name}.jar" fork="true"/>
+        <!-- - -> 
+        <java jar="${jar.dir}/${ant.project.name}.jar" fork="true" classpathref="classpath"/>
+        <!- - -->
+        <!-- -->
+        <java classname="com.opentransittools.test.Test" fork="false" classpathref="classpath">
+            <arg value="${src.dir}/com/opentransittools/test/test.json"/>
+        </java>
+        <!-- -->
     </target>
 
     <target name="clean-build" depends="clean,jar"/>

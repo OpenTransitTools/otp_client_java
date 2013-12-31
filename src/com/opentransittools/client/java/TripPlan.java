@@ -1,4 +1,7 @@
-public class TripPlan 
+package com.opentransittools.client.java;
+
+
+public class TripPlan
 {
     public static class RequestParameters
     {
