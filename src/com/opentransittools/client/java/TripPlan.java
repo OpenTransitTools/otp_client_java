@@ -13,9 +13,33 @@ public class TripPlan
     public static class RequestParameters
     {
         private String m_time;
+        private String m_optimize;
+        private String m_date;
+        private String m_maxHours;
+        private String m_mode;
+        private String m_arriveBy;
+        private String m_maxWalkDinstance;
+        private String m_fromPlace;
+        private String m_toPlace;
 
         public String getTime() {return m_time;}
         public void setTime(String time) {m_time = time; }
+        public String getOptimize() {return m_optimize;}
+        public void setOptimize(String optimize) {m_optimize = optimize;}
+        public String getDate() {return m_date;}
+        public void setDate(String date) {m_date = date;}
+        public String getMaxHours() {return m_maxHours;}
+        public void setMaxHours(String maxHours) {m_maxHours = maxHours;}
+        public String getMode() {return m_mode;}
+        public void setMode(String mode) {m_mode = mode;}
+        public String getArriveBy() {return m_arriveBy;}
+        public void setArriveBy(String arriveBy) {m_arriveBy = arriveBy;}
+        public String getMaxWalkDinstance() {return m_maxWalkDinstance;}
+        public void setMaxWalkDinstance(String maxWalkDinstance) {m_maxWalkDinstance = maxWalkDinstance;}
+        public String getFromPlace() {return m_fromPlace;}
+        public void setFromPlace(String fromPlace) {m_fromPlace = fromPlace;}
+        public String getToPlace() {return m_toPlace;}
+        public void setToPlace(String toPlace) {m_toPlace = toPlace;}
     }
     public RequestParameters getRequestParameters() {return m_requestParameters;}
     public void setRequestParameters(RequestParameters requestParameters) {m_requestParameters = requestParameters;}
@@ -65,5 +89,3 @@ public class TripPlan
     public Plan getPlan() {return m_plan;    }
     public void setPlan(Plan plan) {m_plan = plan;    }
 }
-
-public static class Zoo{}
