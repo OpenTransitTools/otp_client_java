@@ -35,11 +35,10 @@
         <!-- - -> 
         <java jar="${jar.dir}/${ant.project.name}.jar" fork="true" classpathref="classpath"/>
         <!- - -->
-        <!-- -->
+
         <java classname="com.opentransittools.test.Test" fork="false" classpathref="classpath">
-            <arg value="${src.dir}/com/opentransittools/test/test.json"/>
+            <arg value="${src.dir}/com/opentransittools/test/simple_test.json"/>
         </java>
-        <!-- -->
     </target>
 
     <target name="clean-build" depends="clean,jar"/>
