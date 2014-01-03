@@ -3,6 +3,10 @@ package com.opentransittools.client.java;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * NOTE:not all elements are being reflected back by this class...I've chosen a sub-set of elements that I'm interested in.
+ *      But if there are other elements of interest, it's pretty easy to add below. 
+ */
 public class TripPlan
 {
     @JsonProperty("requestParameters")
@@ -170,15 +174,67 @@ public class TripPlan
             public Double elevationGained;
 
             @JsonProperty("transfers")
-            public int transers;
+            public Integer transers;
             @JsonProperty("fare")
             public Fare fare;
             @JsonProperty("legs")
             public Leg legs[];
         }
 
+        /**
+         *   {
+         *       "from":
+         *       "to":
+         *       "legGeometry":{"points":"kpotGbmskVk@?mCW","levels":null,"length":294},
+         * 
+         *       "startTime":1387848986000,"endTime":1387854837000,
+         *       "distance":7522.2365911245715,
+         *       "mode":"WALK","route":"", 
+         *       "agencyName":null,"agencyId":null,"agencyUrl":null,"agencyTimeZoneOffset":0,
+         *       "tripShortName":null,"headsign":null,"tripId":null,
+         *       "routeColor":null,"routeId":null,"routeTextColor":null,"interlineWithPreviousLeg":null,
+         *       "routeShortName":null,"routeLongName":null,
+         *       "boardRule":null,"alightRule":null,"rentedBike":null,"bogusNonTransitLeg":false,
+         *       "duration":5851000,
+         *
+         *       "notes":[{"text":"Caution!"}],
+         *       "alerts":[{"alertHeaderText":{"translations":{"entry":[{"key":"en","value":"Caution!"}]},"someTranslation":"Caution!"}}],
+         *       "steps":[
+         *           {"distance":24.44480017811421,"relativeDirection":null,"streetName":"834 SE LA MBERT ST, PORTLAND","absoluteDirection":"NORTH","exit":null,"stayOn":false,"bogusName":false,"lon":-122.6569759304584,"lat":45.46838276495563,"elevation":"0,14.1,5,14.2,15,14.2,24,14.2"},
+         *           {"distance":1636.7473567151435,"relativeDirection":"RIGHT","streetName":"Southeast McLoughlin Boulevard","absoluteDirection":"NORTHWEST","exit":null,"stayOn":false,"bogusName":false,"lon":-122.6519503,"lat":45.4887532,"elevation":"0,...","alerts":[{"alertHeaderText":{"translations":{"entry":[{"key":"en","value":"Caution!"}]},"someTranslation":"Caution!"}}]},
+         *       ]
+         *   }
+         */
+        @JsonIgnoreProperties(ignoreUnknown = true)
         public static class Leg
         {
+            @JsonProperty("from")
+            public From from;
+            @JsonProperty("to")
+            public To to;
+
+            @JsonProperty("legGeometry")
+            public LegGeometry legGeometry;
+
+            @JsonProperty("startTime")
+            public Long startTime;
+            @JsonProperty("endTime")
+            public Long endTime;
+            @JsonProperty("distance")
+            public Double distance;
+
+            /**
+             *  "legGeometry":{"points":"kpotGbmskVk@?mCW","levels":null,"length":294},
+             */
+            public static class LegGeometry
+            {
+                @JsonProperty("points")
+                public String points;
+                @JsonProperty("length")
+                public Integer length;
+                @JsonProperty("levels")
+                public Integer levels;
+            }
         }
 
         public static class Fare
