@@ -1,4 +1,4 @@
-<project name="TripPlannerWS" basedir="." default="main">
+<project name="otp_client" basedir="." default="main">
     <property name="main-class"  value="com.opentransittools.test.Test"/>
     <property name="src.dir"     value="src"/>
     <property name="build.dir"   value="build"/>
