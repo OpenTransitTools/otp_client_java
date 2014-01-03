@@ -1,4 +1,4 @@
-package com.opentransittools.client.java;
+package com.opentransittools.client;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

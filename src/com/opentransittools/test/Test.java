@@ -6,7 +6,7 @@ import java.util.Scanner;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import com.opentransittools.client.java.TripPlan;
+import com.opentransittools.client.TripPlan;
 
 public class Test
 {
