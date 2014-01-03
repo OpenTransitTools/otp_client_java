@@ -146,6 +146,8 @@ public class TripPlan
             public Double elevationLost;
             @JsonProperty("elevationGained")
             public Double elevationGained;
+            @JsonProperty("tooSloped")
+            public Boolean tooSloped;
 
             @JsonProperty("transfers")
             public Integer transers;
@@ -204,7 +206,7 @@ public class TripPlan
             public Note notes[];
 
             @JsonProperty("steps")
-            public Note steps[];
+            public Step steps[];
 
             @JsonProperty("legGeometry")
             public LegGeometry legGeometry;

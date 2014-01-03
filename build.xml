@@ -37,7 +37,7 @@
         <!- - -->
 
         <java classname="com.opentransittools.test.Test" fork="false" classpathref="classpath">
-            <arg value="${src.dir}/com/opentransittools/test/simple_test.json"/>
+            <arg value="${src.dir}/com/opentransittools/test/test.json"/>
         </java>
     </target>
 
