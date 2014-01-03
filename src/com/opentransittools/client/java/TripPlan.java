@@ -76,7 +76,7 @@ public class TripPlan
         public To to;
 
         @JsonProperty("itineraries")
-        public Itineraries itineraries[];
+        public Itinerary itineraries[];
 
         @JsonIgnoreProperties({"geometry"})
         public static class To
