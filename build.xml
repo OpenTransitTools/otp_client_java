@@ -1,10 +1,11 @@
 <project name="otp_client" basedir="." default="main">
-    <property name="main-class"  value="com.opentransittools.test.Test"/>
+    <property name="main-class"  value="com.opentransittools.client.OtpClient"/>
     <property name="src.dir"     value="src"/>
     <property name="build.dir"   value="build"/>
     <property name="lib.dir"     value="lib"/>
     <property name="classes.dir" value="${build.dir}/classes"/>
     <property name="jar.dir"     value="${build.dir}/jar"/>
+    <property name="test.dir"    value="com/opentransittools/test"/>
 
     <path id="classpath">
         <fileset dir="${lib.dir}" includes="**/*.jar"/>
@@ -24,7 +25,7 @@
 
     <target name="jar" depends="compile">
         <mkdir dir="${jar.dir}"/>
-        <jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${classes.dir}">
+        <jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${classes.dir}" excludes="${test.dir},${test.dir}/**.*">
             <manifest>
                 <attribute name="Main-Class" value="${main-class}"/>
             </manifest>
@@ -40,7 +41,7 @@
             <!--
             <arg value="${src.dir}/com/opentransittools/test/pdx_zoo.json"/>
             -->
-            <arg value="${src.dir}/com/opentransittools/test/bike_transit.json"/>
+            <arg value="${src.dir}/${test.dir}/bike_transit.json"/>
         </java>
     </target>
 
