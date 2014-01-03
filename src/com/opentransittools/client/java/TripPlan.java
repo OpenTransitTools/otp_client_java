@@ -14,32 +14,6 @@ public class TripPlan
     @JsonProperty("plan")
     public Plan plan;
 
-    /** 
-     * "requestParameters":{"optimize":"QUICK","time":"10:15pm","arriveBy":"false","maxWalkDistance":"840.0","fromPlace":"834 SE LA MBERT ST, PORTLAND::45.468384,-122.65718","toPlace":"Art Museum, Portland (Stop ID 6493)::45.516304,-122.68399","date":"2013 -12-20","maxHours":"6","mode":"WALK"},
-     * @author purcellf
-     */
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    public static class RequestParameters
-    {
-        @JsonProperty("time")
-        public String time;
-        @JsonProperty("date")
-        public String date;
-        @JsonProperty("optimize")
-        public String optimize;
-        @JsonProperty("maxHours")
-        public String maxHours;
-        @JsonProperty("mode")
-        public String mode;
-        @JsonProperty("arriveBy")
-        public String arriveBy;
-        @JsonProperty("maxWalkDistance")
-        public String maxWalkDistance;
-        @JsonProperty("fromPlace")
-        public String fromPlace;
-        @JsonProperty("toPlace")
-        public String toPlace;
-    }
 
     /**
      *        "plan":{"date":1387848986000,
@@ -186,16 +160,18 @@ public class TripPlan
          *       "from":
          *       "to":
          *       "legGeometry":{"points":"kpotGbmskVk@?mCW","levels":null,"length":294},
-         * 
+         *       "mode":"WALK","route":"",
+         *
          *       "startTime":1387848986000,"endTime":1387854837000,
          *       "distance":7522.2365911245715,
-         *       "mode":"WALK","route":"", 
-         *       "agencyName":null,"agencyId":null,"agencyUrl":null,"agencyTimeZoneOffset":0,
-         *       "tripShortName":null,"headsign":null,"tripId":null,
-         *       "routeColor":null,"routeId":null,"routeTextColor":null,"interlineWithPreviousLeg":null,
-         *       "routeShortName":null,"routeLongName":null,
-         *       "boardRule":null,"alightRule":null,"rentedBike":null,"bogusNonTransitLeg":false,
          *       "duration":5851000,
+         *
+         *       "agencyName":null,"agencyId":null,"agencyUrl":null,"agencyTimeZoneOffset":0,
+         *       "tripId":null,"tripShortName":null,"interlineWithPreviousLeg":null,
+         *       "headsign":null,
+         *       "routeId":null,"routeShortName":null,"routeLongName":null,
+         *       "routeColor":null,"routeTextColor":null,
+         *       "boardRule":null,"alightRule":null,"rentedBike":null,"bogusNonTransitLeg":false,
          *
          *       "notes":[{"text":"Caution!"}],
          *       "alerts":[{"alertHeaderText":{"translations":{"entry":[{"key":"en","value":"Caution!"}]},"someTranslation":"Caution!"}}],
@@ -212,9 +188,8 @@ public class TripPlan
             public From from;
             @JsonProperty("to")
             public To to;
-
-            @JsonProperty("legGeometry")
-            public LegGeometry legGeometry;
+            @JsonProperty("mode")
+            public String mode;
 
             @JsonProperty("startTime")
             public Long startTime;
@@ -222,6 +197,60 @@ public class TripPlan
             public Long endTime;
             @JsonProperty("distance")
             public Double distance;
+            @JsonProperty("duration")
+            public Double duration;
+
+            @JsonProperty("notes")
+            public Note notes[];
+
+            @JsonProperty("steps")
+            public Note steps[];
+
+            @JsonProperty("legGeometry")
+            public LegGeometry legGeometry;
+
+
+            /**
+             * "notes":[{"text":"Caution!"}],
+             * "alerts":[{"alertHeaderText":{"translations":{"entry":[{"key":"en","value":"Caution!"}]},"someTranslation":"Caution!"}}],
+             *
+             * TODO: move to 'Alert' at some point (note was just a simple alerts hack) 
+             */
+            public static class Note
+            {
+                @JsonProperty("text")
+                public String text;
+            }
+
+            /**
+             *       "steps":[
+             *           {"distance":24.44480017811421,"relativeDirection":null,"streetName":"834 SE LA MBERT ST, PORTLAND","absoluteDirection":"NORTH","exit":null,"stayOn":false,"bogusName":false,"lon":-122.6569759304584,"lat":45.46838276495563,"elevation":"0,14.1,5,14.2,15,14.2,24,14.2"},
+             *           {"distance":1636.7473567151435,"relativeDirection":"RIGHT","streetName":"Southeast McLoughlin Boulevard","absoluteDirection":"NORTHWEST","exit":null,"stayOn":false,"bogusName":false,"lon":-122.6519503,"lat":45.4887532,"elevation":"0,...","alerts":[{"alertHeaderText":{"translations":{"entry":[{"key":"en","value":"Caution!"}]},"someTranslation":"Caution!"}}]},
+             *       ]
+             */
+            @JsonIgnoreProperties(ignoreUnknown = true)
+            public static class Step
+            {
+                @JsonProperty("streetName")
+                public String streetName;
+                @JsonProperty("lon")
+                public Double lon;
+                @JsonProperty("lat")
+                public Double lat;
+
+                @JsonProperty("distance")
+                public Double distance;
+                @JsonProperty("absoluteDirection")
+                public String absoluteDirection;
+                @JsonProperty("relativeDirection")
+                public String relativeDirection;
+
+                @JsonProperty("stayOn")
+                public Boolean stayOn;
+
+                @JsonProperty("elevation")
+                public String elevation;
+            }
 
             /**
              *  "legGeometry":{"points":"kpotGbmskVk@?mCW","levels":null,"length":294},
@@ -240,5 +269,33 @@ public class TripPlan
         public static class Fare
         {
         }
+    }
+
+
+    /** 
+     * "requestParameters":{"optimize":"QUICK","time":"10:15pm","arriveBy":"false","maxWalkDistance":"840.0","fromPlace":"834 SE LA MBERT ST, PORTLAND::45.468384,-122.65718","toPlace":"Art Museum, Portland (Stop ID 6493)::45.516304,-122.68399","date":"2013 -12-20","maxHours":"6","mode":"WALK"},
+     * @author purcellf
+     */
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class RequestParameters
+    {
+        @JsonProperty("time")
+        public String time;
+        @JsonProperty("date")
+        public String date;
+        @JsonProperty("optimize")
+        public String optimize;
+        @JsonProperty("maxHours")
+        public String maxHours;
+        @JsonProperty("mode")
+        public String mode;
+        @JsonProperty("arriveBy")
+        public String arriveBy;
+        @JsonProperty("maxWalkDistance")
+        public String maxWalkDistance;
+        @JsonProperty("fromPlace")
+        public String fromPlace;
+        @JsonProperty("toPlace")
+        public String toPlace;
     }
 }
