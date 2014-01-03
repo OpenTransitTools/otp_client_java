@@ -49,15 +49,15 @@ public class TripPlan
         public String date;
 
         @JsonProperty("from")
-        public From from;
+        public Place from;
         @JsonProperty("to")
-        public To to;
+        public Place to;
 
         @JsonProperty("itineraries")
         public Itinerary itineraries[];
 
         @JsonIgnoreProperties({"geometry"})
-        public static class To
+        public static class Place
         {
             @JsonProperty("name")
             public String name;
@@ -68,7 +68,7 @@ public class TripPlan
             public Double lat;
 
             @JsonProperty("stopId")
-            public String stopId;
+            public Stop stopId;
             @JsonProperty("stopCode")
             public String stopCode;
             @JsonProperty("arrival")
@@ -79,30 +79,18 @@ public class TripPlan
             public String orig;
             @JsonProperty("zoneId")
             public String zoneId;
-        }
+            
+            /** 
+             * {"agencyId":"TriMet","id":"10579"}
+             */
+            public static class Stop 
+            {
+                @JsonProperty("agencyId")
+                public String agencyId;
 
-        @JsonIgnoreProperties({"geometry"})
-        public static class From
-        {
-            @JsonProperty("name")
-            public String name;
-            @JsonProperty("lon")
-            public Double lon;
-            @JsonProperty("lat")
-            public Double lat;
-
-            @JsonProperty("stopId")
-            public String stopId;
-            @JsonProperty("stopCode")
-            public String stopCode;
-            @JsonProperty("arrival")
-            public String arrival;
-            @JsonProperty("departure")
-            public String departure;
-            @JsonProperty("orig")
-            public String orig;
-            @JsonProperty("zoneId")
-            public String zoneId;
+                @JsonProperty("id")
+                public String id;
+            }
         }
 
         /**
@@ -187,9 +175,9 @@ public class TripPlan
         public static class Leg
         {
             @JsonProperty("from")
-            public From from;
+            public Place from;
             @JsonProperty("to")
-            public To to;
+            public Place to;
             @JsonProperty("mode")
             public String mode;
 
@@ -268,8 +256,47 @@ public class TripPlan
             }
         }
 
+        /**
+         * "fare":{"regular":{"currency":{"symbol":"$","currency":"USD","currencyCode":"USD","defaultFractionDigits":2},"cents":250}}
+         */
         public static class Fare
         {
+            @JsonProperty("fare")
+            public FareDetail fare;
+
+            public static class FareDetail
+            {
+                @JsonProperty("regular")
+                public Currency regular;
+
+                /** 
+                 * "regular":{"currency":{"symbol":"$","currency":"USD","currencyCode":"USD","defaultFractionDigits":2},"cents":250}}}
+                 */
+                public static class Currency
+                {
+                    @JsonProperty("currency")
+                    public CurrencyDetail currency;
+
+                    @JsonProperty("cents")
+                    public Integer cents;
+
+                    /**
+                     * "currency":{"symbol":"$","currency":"USD","currencyCode":"USD","defaultFractionDigits":2}
+                     */
+                    public static class CurrencyDetail
+                    {
+                        @JsonProperty("symbol")
+                        public String symbol;
+                        @JsonProperty("currency")
+                        public String currency;
+                        @JsonProperty("currencyCode")
+                        public String currencyCode;
+                        @JsonProperty("defaultFractionDigits")
+                        public Integer defaultFractionDigits;
+                    }
+                }
+            }
+
         }
     }
 
