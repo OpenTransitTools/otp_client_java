@@ -18,11 +18,8 @@ public class Test
 
     public static void main(String[] args) throws Exception
     {
-        //String json = readFile("test.json");
         String file = "test.json";
         if(args.length >= 1) file = args[0];
-        //if(args.length >= 2) from = args[1];
-        //if(args.length >= 3) to = args[2];
 
         ObjectMapper mapper = new ObjectMapper();
         TripPlan p = mapper.readValue(new File(file), TripPlan.class);
