@@ -33,17 +33,21 @@
     </target>
 
     <target name="run" depends="jar">
-        <!-- - -> 
-        <java jar="${jar.dir}/${ant.project.name}.jar" fork="true" classpathref="classpath"/>
-        <!- - -->
-
-        <java classname="com.opentransittools.test.Test" fork="false" classpathref="classpath">
-            <!--
-            <arg value="${src.dir}/${test.dir}/pdx_zoo.json"/>
-            <arg value="${src.dir}/${test.dir}/error.json"/>
-            -->
+        <!-- RUN app by calling OTP via URL -->
+        <java classname="com.opentransittools.client.OtpClient" fork="false" classpathref="classpath">
             <arg value="${src.dir}/${test.dir}/bike_transit.json"/>
         </java>
+
+        <!-- TEST via .json files -->
+        <!-- 
+        <java classname="com.opentransittools.test.Test" fork="false" classpathref="classpath">
+            <!- -
+            <arg value="${src.dir}/${test.dir}/pdx_zoo.json"/>
+            <arg value="${src.dir}/${test.dir}/error.json"/>
+            - ->
+            <arg value="${src.dir}/${test.dir}/bike_transit.json"/>
+        </java>
+        <!- - -->
     </target>
 
     <target name="clean-build" depends="clean,jar"/>

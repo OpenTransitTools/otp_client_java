@@ -1,6 +1,6 @@
 package com.opentransittools.client;
 
-import java.io.File;
+import java.net.URL;
 
 import com.opentransittools.client.TripPlan;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -32,9 +32,9 @@ public class OtpClient
         
     }
 
-    public String makeOtpUrl()
+    public URL makeOtpUrl() throws Exception
     {
-        return "http://maps.trimet.org/prod?fromPlace=PDX::45.587647,-122.593173&toPlace=ZOO::45.509700,-122.716290";
+        return new URL("http://maps.trimet.org/prod?fromPlace=PDX::45.587647,-122.593173&toPlace=ZOO::45.509700,-122.716290");
     }
 
     public TripPlan call() 
@@ -46,6 +46,7 @@ public class OtpClient
         }
         catch(Exception e)
         {
+            System.out.print(e);
         }
         return ret_val;
     }
