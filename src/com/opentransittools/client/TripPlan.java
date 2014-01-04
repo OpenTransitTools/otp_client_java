@@ -13,6 +13,8 @@ public class TripPlan
     public RequestParameters requestParameters;
     @JsonProperty("plan")
     public Plan plan;
+    @JsonProperty("error")
+    public Error errror;
 
 
     /**
@@ -303,7 +305,6 @@ public class TripPlan
 
     /** 
      * "requestParameters":{"optimize":"QUICK","time":"10:15pm","arriveBy":"false","maxWalkDistance":"840.0","fromPlace":"834 SE LA MBERT ST, PORTLAND::45.468384,-122.65718","toPlace":"Art Museum, Portland (Stop ID 6493)::45.516304,-122.68399","date":"2013 -12-20","maxHours":"6","mode":"WALK"},
-     * @author purcellf
      */
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class RequestParameters
@@ -326,5 +327,17 @@ public class TripPlan
         public String fromPlace;
         @JsonProperty("toPlace")
         public String toPlace;
+    }
+
+    /** 
+     *  "error":{"id":500,"msg":"We're sorry. The trip planner is temporarily unavailable. Please try again later.","missing":null,"noPath":true}
+     */
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class Error
+    {
+        @JsonProperty("id")
+        public Integer id;
+        @JsonProperty("msg")
+        public String msg;
     }
 }

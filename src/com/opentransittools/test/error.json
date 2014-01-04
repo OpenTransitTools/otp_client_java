@@ -1,1 +1,5 @@
-{"requestParameters":{"time":"4-4-4","fromPlace":"PDX::45.587647,-122.593173","toPlace":"ZOO::45.509700,-122.716290"},"plan":null,"error":{"id":500,"msg":"We're sorry. The trip planner is temporarily unavailable. Please try again later.","missing":null,"noPath":true}}
+{
+  "requestParameters":{"time":"4-4-4","fromPlace":"PDX::45.587647,-122.593173","toPlace":"ZOO::45.509700,-122.716290"},
+  "plan":null,
+  "error":{"id":500,"msg":"We're sorry. The trip planner is temporarily unavailable. Please try again later.","missing":null,"noPath":true}
+}
