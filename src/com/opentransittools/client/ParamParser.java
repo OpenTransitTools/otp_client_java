@@ -18,13 +18,16 @@ public class ParamParser
     private String m_maxWalkDistance = null;
     private String m_arriveBy        = null;
 
+    private String m_service;
+
     public ParamParser()
     {
+        this.m_service = "http://maps.trimet.org/prod";
     }
 
     public URL makeOtpUrl() throws Exception
     {
-        String url = String.format("http://maps.trimet.org/prod?fromPlace=%s&toPlace=%s&numItins=%s", m_from, m_to, m_itins);
+        String url = String.format("%s?fromPlace=%s&toPlace=%s&numItins=%s", m_service, m_from, m_to, m_itins);
         if(m_mode  != null)    url = url + "&mode=" + m_mode;
         if(m_min   != null)    url = url + "&min="  + m_min;
         if(m_time  != null)    url = url + "&time=" + m_time;
@@ -35,26 +38,47 @@ public class ParamParser
         return new URL(url);
     }
 
+    static public boolean hasGeoCode(String name, String ... etc) {
+        return true;
+    }
+
     public String getFrom() {
         return m_from;
     }
-
     public void setFrom(String from) {
         m_from = from;
+    }
+    public String geoFrom(String from) {
+        m_from = from;
+        return "";
+    }
+    public void setFrom(String from, String lat_lon) {
+        m_from = String.format("%s::%s", from, lat_lon);
+    }
+    public void setFrom(String from, String lat, String lon) {
+        m_from = String.format("%s::%s,%s", from, lat, lon);
     }
 
     public String getTo() {
         return m_to;
     }
-
     public void setTo(String to) {
         m_to = to;
+    }
+    public String geoTo(String to) {
+        m_to = to;
+        return "";
+    }
+    public void setTo(String to, String lat_lon) {
+        m_to = String.format("%s::%s", to, lat_lon);
+    }
+    public void setTo(String to, String lat, String lon) {
+        m_to = String.format("%s::%s,%s", to, lat, lon);
     }
 
     public String getMode() {
         return m_mode;
     }
-
     public void setMode(String mode) {
         m_mode = mode;
     }
@@ -62,7 +86,6 @@ public class ParamParser
     public String getMin() {
         return m_min;
     }
-
     public void setMin(String min) {
         m_min = min;
     }
@@ -70,7 +93,6 @@ public class ParamParser
     public String getTime() {
         return m_time;
     }
-
     public void setTime(String time) {
         m_time = time;
     }
@@ -78,7 +100,6 @@ public class ParamParser
     public String getDate() {
         return m_date;
     }
-
     public void setDate(String date) {
         m_date = date;
     }
@@ -86,7 +107,6 @@ public class ParamParser
     public String getMaxWalkDistance() {
         return m_maxWalkDistance;
     }
-
     public void setMaxWalkDistance(String maxWalkDistance) {
         m_maxWalkDistance = maxWalkDistance;
     }
@@ -94,7 +114,6 @@ public class ParamParser
     public String getArriveBy() {
         return m_arriveBy;
     }
-
     public void setArriveBy(String arriveBy) {
         m_arriveBy = arriveBy;
     }
