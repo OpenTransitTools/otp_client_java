@@ -5,20 +5,22 @@ import java.net.URL;
 /**
  * ParamParser will manage the set of http get parameters for OTP (with default values)
  * http://maps.trimet.org/prod?fromPlace=PDX::45.587647,-122.593173&toPlace=ZOO::45.509700,-122.716290&mode=&min=QUICK&maxWalkDistance=840&time=2:22%20pm&date=1/3/2014&arriveBy=false&itinID=1&wheelchair=&preferredRoutes=null&unpreferredRoutes=null
+ * 
+ * 
  */
 public class ParamParser
 {
-    private String m_from;
-    private String m_to;
-    private String m_itins = "3";
-    private String m_mode = null;
-    private String m_min  = null;
-    private String m_time = null;
-    private String m_date = null; 
-    private String m_maxWalkDistance = null;
-    private String m_arriveBy        = null;
+    protected String m_from;
+    protected String m_to;
+    protected String m_itins = "3";
+    protected String m_mode = null;
+    protected String m_min  = null;
+    protected String m_time = null;
+    protected String m_date = null; 
+    protected String m_maxWalkDistance = null;
+    protected String m_arriveBy        = null;
 
-    private String m_service;
+    protected String m_service;
 
     public ParamParser()
     {
