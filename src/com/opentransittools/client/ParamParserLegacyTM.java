@@ -30,16 +30,16 @@ public class  ParamParserLegacyTM extends ParamParser
     }
 
     public void setMode(String mode) {
-        if(mode.equals("A"))       this.m_mode = ""; 
-        else if(mode.equals("A"))  this.m_mode = ""; 
-        else if(mode.equals("A"))  this.m_mode = ""; 
-        else                       this.m_mode = ""; 
+        if(mode.equals("A"))       this.m_mode = "TRANSIT,WALK";
+        else if(mode.equals("B"))  this.m_mode = "BUSISH,WALK";
+        else if(mode.equals("T"))  this.m_mode = "TRAINISH,WALK";
+        else                       this.m_mode = "TRANSIT,WALK";
     }
 
     public void setMin(String min) {
-        if(min.equals("T"))       this.m_min  = "";
-        else if(min.equals("X"))  this.m_min  = "";
-        else                      this.m_min  = "";
+        if(min.equals("T"))       this.m_min  = "QUICK";
+        else if(min.equals("X"))  this.m_min  = "TRANSFERS";
+        else                      this.m_min  = "QUICK";
     }
 
     public void setTime(String time) {
@@ -54,6 +54,19 @@ public class  ParamParserLegacyTM extends ParamParser
             ; // add current time
     }
 
+    /** 
+     * convert from % of a mile (e.g., 1.0 = 1 mile -- 0.50 = 1/2 mile, 
+     */
+    public void setMaxWalkDistance(Double maxWalkDistance)
+    {
+        if(maxWalkDistance < 30)
+            maxWalkDistance = maxWalkDistance * 1609.5;
+        if(maxWalkDistance < 10)
+            maxWalkDistance = 1609.0;
+
+        Long m = Math.round(maxWalkDistance);
+        m_maxWalkDistance = m.toString();
+    }
     public void setMaxWalkDistance(String maxWalkDistance)
     {
         try
@@ -68,28 +81,5 @@ public class  ParamParserLegacyTM extends ParamParser
     public void setMaxWalkDistance(Integer maxWalkDistance)
     {
         this.setMaxWalkDistance(new Double(maxWalkDistance));
-    }
-    /** 
-     * convert from % of a mile (e.g., 1.0 = 1 mile -- 0.50 = 1/2 mile, 
-     */
-    public void setMaxWalkDistance(Double maxWalkDistance)
-    {
-        if(maxWalkDistance < 30)
-            maxWalkDistance = maxWalkDistance * 1609.5;
-        if(maxWalkDistance < 10)
-            maxWalkDistance = 1609.0;
-
-        Long m = Math.round(maxWalkDistance);
-        m_maxWalkDistance = m.toString();
-    }
-
-    public String getArriveBy() {
-        return m_arriveBy;
-    }
-    public void setArriveBy(String arriveBy) {
-        m_arriveBy = arriveBy;
-    }
-    public void setArriveBy(Boolean arriveBy) {
-        m_arriveBy = arriveBy.toString();
     }
 }
