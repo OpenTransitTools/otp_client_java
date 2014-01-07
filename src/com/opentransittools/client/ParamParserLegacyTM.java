@@ -54,15 +54,20 @@ public class  ParamParserLegacyTM extends ParamParser
             ; // add current time
     }
 
-    public void setMaxWalkDistance(String maxWalkDistance) {
+    public void setMaxWalkDistance(String maxWalkDistance)
+    {
         try
         {
             this.setMaxWalkDistance(new Double(maxWalkDistance));
         }
         catch(Exception e)
         {
-            
+            this.m_maxWalkDistance = "1610"; // default to 1 mile
         }
+    }
+    public void setMaxWalkDistance(Integer maxWalkDistance)
+    {
+        this.setMaxWalkDistance(new Double(maxWalkDistance));
     }
     /** 
      * convert from % of a mile (e.g., 1.0 = 1 mile -- 0.50 = 1/2 mile, 
@@ -70,8 +75,12 @@ public class  ParamParserLegacyTM extends ParamParser
     public void setMaxWalkDistance(Double maxWalkDistance)
     {
         if(maxWalkDistance < 30)
-            maxWalkDistance = maxWalkDistance * 1800;
-        m_maxWalkDistance = maxWalkDistance.toString();
+            maxWalkDistance = maxWalkDistance * 1609.5;
+        if(maxWalkDistance < 10)
+            maxWalkDistance = 1609.0;
+
+        Long m = Math.round(maxWalkDistance);
+        m_maxWalkDistance = m.toString();
     }
 
     public String getArriveBy() {
