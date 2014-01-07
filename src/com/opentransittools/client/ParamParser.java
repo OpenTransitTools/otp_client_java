@@ -110,6 +110,8 @@ public class ParamParser
     }
     public void setTime(String time) {
         m_time = time;
+        if(m_date == null)
+            ; // add current date
     }
 
     public String getDate() {
@@ -117,6 +119,8 @@ public class ParamParser
     }
     public void setDate(String date) {
         m_date = date;
+        if(m_time  == null)
+            ; // add current time
     }
 
     public String getMaxWalkDistance() {
@@ -125,11 +129,17 @@ public class ParamParser
     public void setMaxWalkDistance(String maxWalkDistance) {
         m_maxWalkDistance = maxWalkDistance;
     }
+    public void setMaxWalkDistance(Integer maxWalkDistance) {
+        m_maxWalkDistance = maxWalkDistance.toString();
+    }
 
     public String getArriveBy() {
         return m_arriveBy;
     }
     public void setArriveBy(String arriveBy) {
         m_arriveBy = arriveBy;
+    }
+    public void setArriveBy(Boolean arriveBy) {
+        m_arriveBy = arriveBy.toString();
     }
 }
