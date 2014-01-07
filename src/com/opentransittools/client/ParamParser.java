@@ -10,8 +10,9 @@ public class ParamParser
 {
     private String m_from;
     private String m_to;
-    private String m_mode = "TRANSIT,WALK";
-    private String m_min  = "QUICK";
+    private String m_itins = "3";
+    private String m_mode = null;
+    private String m_min  = null;
     private String m_time = null;
     private String m_date = null; 
     private String m_maxWalkDistance = null;
@@ -23,7 +24,15 @@ public class ParamParser
 
     public URL makeOtpUrl() throws Exception
     {
-        return new URL("http://maps.trimet.org/prod?fromPlace=PDX::45.587647,-122.593173&toPlace=ZOO::45.509700,-122.716290");
+        String url = String.format("http://maps.trimet.org/prod?fromPlace=%s&toPlace=%s&numItins=%s", m_from, m_to, m_itins);
+        if(m_mode  != null)    url = url + "&mode=" + m_mode;
+        if(m_min   != null)    url = url + "&min="  + m_min;
+        if(m_time  != null)    url = url + "&time=" + m_time;
+        if(m_date  != null)    url = url + "&date=" + m_date;
+        if(m_arriveBy != null) url = url + "&arriveBy=" + m_arriveBy;
+        if(m_maxWalkDistance != null) url = url + "&maxWalkDistance=" + m_maxWalkDistance;
+        System.out.print("URL: " + url);
+        return new URL(url);
     }
 
     public String getFrom() {
