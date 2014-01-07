@@ -27,7 +27,7 @@ public class ParamParser
 
     public URL makeOtpUrl() throws Exception
     {
-        String url = String.format("%s?fromPlace=%s&toPlace=%s&numItins=%s", m_service, m_from, m_to, m_itins);
+        String url = String.format("%s?fromPlace=%s&toPlace=%s&numItins=%s", m_service, urlEncode(m_from), urlEncode(m_to), m_itins);
         if(m_mode  != null)    url = url + "&mode=" + m_mode;
         if(m_min   != null)    url = url + "&min="  + m_min;
         if(m_time  != null)    url = url + "&time=" + m_time;
@@ -38,8 +38,23 @@ public class ParamParser
         return new URL(url);
     }
 
-    static public boolean hasGeoCode(String name, String ... etc) {
+    static public boolean hasGeoCode(String name, String ... etc)
+    {
         return true;
+    }
+
+    static public String urlEncode(String str)
+    {
+        String ret_val = str;
+        try
+        {
+            ret_val = ret_val.replace(" ", "%20"); // spaces to %20
+        }
+        catch(Exception e)
+        {
+            
+        }
+        return ret_val;
     }
 
     public String getFrom() {
