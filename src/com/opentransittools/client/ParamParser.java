@@ -21,10 +21,12 @@ public class ParamParser
     protected String m_arriveBy        = null;
 
     protected String m_service;
+    protected String m_geocode;
 
     public ParamParser()
     {
         this.m_service = "http://maps.trimet.org/prod";
+        this.m_geocode = "http://maps.trimet.org/geocoder/geocode";
     }
 
     public URL makeOtpUrl() throws Exception
@@ -40,6 +42,9 @@ public class ParamParser
         return new URL(url);
     }
 
+    /** 
+     * http://maps.trimet.org/geocoder/geocode?address=834%20SE%20Lambert
+     */
     static public boolean hasGeoCode(String name, String ... etc)
     {
         return true;

@@ -18,7 +18,7 @@ public class  ParamParserLegacyTM extends ParamParser
 {
     public ParamParserLegacyTM()
     {
-        this.m_service = "http://maps.trimet.org/prod";
+        super();
     }
 
     public void setFrom(String from, String lat_lon) {
