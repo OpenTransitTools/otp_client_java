@@ -3,6 +3,9 @@ package com.opentransittools.client;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+
+//JacksonXmlRootElement("custUser")
+
 /**
  * NOTE:not all elements are being reflected back by this class...I've chosen a sub-set of elements that I'm interested in.
  *      But if there are other elements of interest, it's pretty easy to add below. 
@@ -19,7 +22,7 @@ public class Geocode
      * 
      */
     @JsonIgnoreProperties(ignoreUnknown = true)
-    public static class Geocode
+    public static class Geocodex
     {
         @JsonProperty("time")
         public String time;

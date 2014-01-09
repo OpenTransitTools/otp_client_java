@@ -15,9 +15,6 @@ public class TripPlan
     public Plan plan;
     @JsonProperty("error")
     public Error errror;
-    @JsonProperty("geocode")
-    public Geocode geocode;
-
 
     /**
      *  "plan":{"date":1387848986000,

@@ -52,7 +52,7 @@ public class ParamParser
     /** 
      * http://maps.trimet.org/geocoder/geocode?address=834%20SE%20Lambert
      */
-    static public boolean hasGeoCode(String name, String ... etc)
+    static public boolean hasCoords(String name, String ... etc)
     {
         return true;
     }
@@ -60,7 +60,7 @@ public class ParamParser
     /**
      * Turn -122.5,45.6 into 45.6,-122.5
      */
-    static public String reverseGeoCoord(String geo)
+    static public String reverseCoords(String geo)
     {
         String ret_val = geo;
         try {
@@ -70,11 +70,6 @@ public class ParamParser
         catch(Exception e) {
         }
         return ret_val;
-    }
-
-    public String geoCode(String name, String ... etc)
-    {
-        return true;
     }
 
     static public String urlEncode(String str)
