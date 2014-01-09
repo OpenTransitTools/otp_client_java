@@ -20,7 +20,6 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlText;
  *     </results>
  * </geocoderResults> 
  */
-//@JacksonXmlRootElement("geocoderResults")
 public class Geocoder
 {
     public Integer count;
@@ -33,7 +32,9 @@ public class Geocoder
      */
     public static class Geocode
     {
-        public String time;
+        public String description;
+        public Double lat;
+        public Double lng;
     }
 
     /** 
@@ -50,10 +51,7 @@ public class Geocoder
         if(args.length >= 1) file = args[0];
 
         XmlMapper xmlMapper = new XmlMapper();
-        List entries = xmlMapper.readValue(new File(file), List.class);
-
-        ObjectMapper jsonMapper = new ObjectMapper();
-        String json = jsonMapper.writeValueAsString(entries);
-        System.out.println(json);
+        Geocoder geo = xmlMapper.readValue(new File(file), Geocoder.class);
+        System.out.println(geo.results[0].description);
    }
 }
