@@ -29,6 +29,13 @@ public class ParamParser
         this.m_geocode = "http://maps.trimet.org/geocoder/geocode";
     }
 
+    public URL makeGeoUrl(String geo) throws Exception
+    {
+        String url = String.format("%s?address=%s", m_geocode, urlEncode(geo));
+        System.out.print("URL: " + url);
+        return new URL(url);
+    }
+    
     public URL makeOtpUrl() throws Exception
     {
         String url = String.format("%s?fromPlace=%s&toPlace=%s&numItins=%s", m_service, urlEncode(m_from), urlEncode(m_to), m_itins);
@@ -46,6 +53,26 @@ public class ParamParser
      * http://maps.trimet.org/geocoder/geocode?address=834%20SE%20Lambert
      */
     static public boolean hasGeoCode(String name, String ... etc)
+    {
+        return true;
+    }
+
+    /**
+     * Turn -122.5,45.6 into 45.6,-122.5
+     */
+    static public String reverseGeoCoord(String geo)
+    {
+        String ret_val = geo;
+        try {
+            String s[] = geo.split(",");
+            ret_val = String.format("%s,%s", s[1], s[0]);
+        }
+        catch(Exception e) {
+        }
+        return ret_val;
+    }
+
+    public String geoCode(String name, String ... etc)
     {
         return true;
     }
