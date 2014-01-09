@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * NOTE:not all elements are being reflected back by this class...I've chosen a sub-set of elements that I'm interested in.
  *      But if there are other elements of interest, it's pretty easy to add below. 
  */
-public class TripPlan
+public class Geocode
 {
     @JsonProperty("requestParameters")
     public RequestParameters requestParameters;
