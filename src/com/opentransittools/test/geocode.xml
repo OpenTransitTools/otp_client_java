@@ -1,12 +1,3 @@
-HTTP/1.1 200 OK
-Date: Thu, 09 Jan 2014 06:18:33 GMT
-Content-Type: text/xml
-Cache-Control: max-age=2592000
-Expires: Sat, 08 Feb 2014 06:18:33 GMT
-Vary: Accept-Encoding,User-Agent
-Transfer-Encoding: chunked
-Set-Cookie: Coyote-2-ac1966cb=ac1966de:0; path=/
-
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <geocoderResults>
   <count>2</count>
