@@ -1,0 +1,25 @@
+HTTP/1.1 200 OK
+Date: Thu, 09 Jan 2014 06:18:33 GMT
+Content-Type: text/xml
+Cache-Control: max-age=2592000
+Expires: Sat, 08 Feb 2014 06:18:33 GMT
+Vary: Accept-Encoding,User-Agent
+Transfer-Encoding: chunked
+Set-Cookie: Coyote-2-ac1966cb=ac1966de:0; path=/
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<geocoderResults>
+  <count>2</count>
+  <results>
+    <result>
+      <description>834 SE LAMBERT CIRCLE</description>
+      <lat>45.490943</lat>
+      <lng>-122.406561</lng>
+    </result>
+    <result>
+      <description>834 SE LAMBERT ST</description>
+      <lat>45.468602</lat>
+      <lng>-122.657627</lng>
+    </result>
+  </results>
+</geocoderResults>
