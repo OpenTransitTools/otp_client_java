@@ -6,6 +6,8 @@ import com.opentransittools.client.TripPlan;
 import com.opentransittools.client.Geocoder;
 import com.opentransittools.client.ParamParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+
 
 /**
  * OtpClient does three things:
@@ -15,12 +17,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 public class OtpClient
 {
-    private ObjectMapper m_mapper;
+    private ObjectMapper m_json;
+    private XmlMapper    m_xml;
     private ParamParser  m_params;
 
     public OtpClient(ParamParser p)
     {
-        this.m_mapper = new ObjectMapper();
+        this.m_json = new ObjectMapper();
+        this.m_xml  = new XmlMapper();
         this.m_params = p;
     }
 
@@ -29,7 +33,7 @@ public class OtpClient
         TripPlan ret_val = null;
         try
         {
-            ret_val = m_mapper.readValue(this.m_params.makeOtpUrl(), TripPlan.class);
+            ret_val = m_json.readValue(this.m_params.makeOtpUrl(), TripPlan.class);
         }
         catch(Exception e)
         {
@@ -43,7 +47,7 @@ public class OtpClient
         Geocoder ret_val = null;
         try
         {
-            ret_val = m_mapper.readValue(this.m_params.makeGeoUrl(geo), Geocoder.class);
+            ret_val = m_xml.readValue(this.m_params.makeGeoUrl(geo), Geocoder.class);
         }
         catch(Exception e)
         {
@@ -62,13 +66,14 @@ public class OtpClient
         ParamParser p = new ParamParser();
         OtpClient c = new OtpClient(p);
 
-        Geocoder g = c.geocode(from);
-        System.out.println(g.results[0].description);
+        Geocoder f = c.geocode(from);
+        Geocoder t = c.geocode(to);
+        //System.out.println(f.getNamedLatLon());
 
-        p.setFrom(from);
-        p.setTo(to);
+        p.setFrom(f.getNamedLatLon());
+        p.setTo(t.getNamedLatLon());
 
-        TripPlan t = c.call();
-        System.out.print(t.plan.from.name);
+        TripPlan tp = c.call();
+        System.out.print(tp.plan.from.name);
     }
 }

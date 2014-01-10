@@ -35,8 +35,33 @@ public class Geocoder
         public String description;
         public Double lat;
         public Double lng;
+
+        public String getNamedLatLon()
+        {
+            String ret_val = null;
+            try
+            {
+                ret_val = String.format("%s::%s,%s", description, lat, lng); 
+            }
+            catch(Exception e)
+            {}
+            return ret_val;
+        }
     }
 
+    public String getNamedLatLon(Geocode g)
+    {
+        return g != null ? g.getNamedLatLon() : null;
+    }
+
+    public String getNamedLatLon()
+    {
+        String ret_val = null;
+        if(this.results != null && this.count > 0)
+            ret_val = getNamedLatLon(this.results[0]);
+        return ret_val;
+    }
+    
     /** 
      */
     public static class Error
