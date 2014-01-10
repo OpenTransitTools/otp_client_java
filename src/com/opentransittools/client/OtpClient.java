@@ -28,7 +28,7 @@ public class OtpClient
         this.m_params = p;
     }
 
-    public TripPlan call() 
+    public TripPlan planner() 
     {
         TripPlan ret_val = null;
         try
@@ -73,7 +73,7 @@ public class OtpClient
         p.setFrom(f.getNamedLatLon());
         p.setTo(t.getNamedLatLon());
 
-        TripPlan tp = c.call();
+        TripPlan tp = c.planner();
         System.out.print(tp.plan.from.name);
     }
 }
