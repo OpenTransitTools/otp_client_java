@@ -3,6 +3,7 @@ package com.opentransittools.client;
 import java.net.URL;
 
 import com.opentransittools.client.TripPlan;
+import com.opentransittools.client.Geocoder;
 import com.opentransittools.client.ParamParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -37,6 +38,20 @@ public class OtpClient
         return ret_val;
     }
 
+    public Geocoder geocode(String geo)
+    {
+        Geocoder ret_val = null;
+        try
+        {
+            ret_val = m_mapper.readValue(this.m_params.makeGeoUrl(geo), Geocoder.class);
+        }
+        catch(Exception e)
+        {
+            System.out.print(e);
+        }
+        return ret_val;
+    }
+
     public static void main(String[] args) throws Exception
     {
         String from = "PDX";
@@ -45,10 +60,11 @@ public class OtpClient
         if(args.length >= 2) to   = args[1];
 
         ParamParser p = new ParamParser();
+        OtpClient c = new OtpClient(p);
+
         p.setFrom(from);
         p.setTo(to);
 
-        OtpClient c = new OtpClient(p);
         TripPlan t = c.call();
         System.out.print(t.plan.from.name);
     }
