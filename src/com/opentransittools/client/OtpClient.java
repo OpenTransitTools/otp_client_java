@@ -62,6 +62,9 @@ public class OtpClient
         ParamParser p = new ParamParser();
         OtpClient c = new OtpClient(p);
 
+        Geocoder g = c.geocode(from);
+        System.out.println(g.results[0].description);
+
         p.setFrom(from);
         p.setTo(to);
 

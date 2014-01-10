@@ -34,12 +34,12 @@
 
     <target name="run" depends="jar">
         <!-- RUN app by calling OTP via URL -->
-        <!-- -->
         <java classname="com.opentransittools.client.OtpClient" fork="false" classpathref="classpath">
+            <!-- - ->
             <arg value="PCC SYLVANIA::45.437823,-122.729955"/>
             <arg value="SW PACIFIC HWY @ SW BEEF BEND RD::45.411448,-122.793718"/>
+            <!- - -->
         </java>
-        <!-- -->
 
         <!-- TEST via .xml file -->
         <!-- - ->
