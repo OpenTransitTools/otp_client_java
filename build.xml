@@ -32,6 +32,15 @@
         </jar>
     </target>
 
+    <target name="complete-jar" depends="jar">
+        <jar destfile="${jar.dir}/${ant.project.name}_all.jar" basedir="${classes.dir}" excludes="${test.dir},${test.dir}/**.*">
+            <zipgroupfileset dir="lib" includes="*.jar"/>
+            <manifest>
+                <attribute name="Main-Class" value="${main-class}"/>
+            </manifest>
+        </jar>
+    </target>
+
     <target name="run" depends="jar">
         <!-- RUN app by calling OTP via URL -->
         <java classname="com.opentransittools.client.OtpClient" fork="false" classpathref="classpath">
@@ -60,6 +69,6 @@
         <!- - -->
     </target>
 
-    <target name="clean-build" depends="clean,jar"/>
-    <target name="main" depends="clean,run"/>
+    <target name="clean-build" depends="clean,jar,complete-jar"/>
+    <target name="main" depends="clean-build,run"/>
 </project>
