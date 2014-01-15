@@ -82,8 +82,24 @@ public class SolrGeocoder
         {
             if(this.results.length == 0)
                 ret_val = getNamedLatLon(this.results[0]);
-            else if(this.results[0].score > this.results[1].score * 2)
+            else if(dominantFirst())
                 ret_val = getNamedLatLon(this.results[0]);
+        }
+        return ret_val;
+    }
+
+    public boolean hasResults()
+    {
+        return this.results != null && this.results.length > 0;
+    }
+
+    public boolean dominantFirst()
+    {
+        boolean ret_val = false;
+        if(hasResults())
+        {
+            if(this.results.length == 0 || this.results[0].score > this.results[1].score * 2)
+                ret_val = true;
         }
         return ret_val;
     }
