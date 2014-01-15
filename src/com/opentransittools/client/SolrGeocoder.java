@@ -93,15 +93,19 @@ public class SolrGeocoder
         return this.results != null && this.results.length > 0;
     }
 
-    public boolean dominantFirst()
+    public boolean dominantFirst(double factor)
     {
         boolean ret_val = false;
         if(hasResults())
         {
-            if(this.results.length == 0 || this.results[0].score > this.results[1].score * 2)
+            if(this.results.length == 0 || this.results[0].score > this.results[1].score * factor)
                 ret_val = true;
         }
         return ret_val;
+    }
+    public boolean dominantFirst()
+    {
+        return dominantFirst(2.0);
     }
 
     public List<String> getNamedLatLonList()
