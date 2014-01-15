@@ -3,7 +3,7 @@ package com.opentransittools.client;
 import java.net.URL;
 
 import com.opentransittools.client.TripPlan;
-import com.opentransittools.client.Geocoder;
+import com.opentransittools.client.OtpGeocoder;
 import com.opentransittools.client.ParamParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
@@ -42,12 +42,26 @@ public class OtpClient
         return ret_val;
     }
 
-    public Geocoder geocode(String geo)
+    public OtpGeocoder otp_geocode(String geo)
     {
-        Geocoder ret_val = null;
+        OtpGeocoder ret_val = null;
         try
         {
-            ret_val = m_xml.readValue(this.m_params.makeGeoUrl(geo), Geocoder.class);
+            ret_val = m_xml.readValue(this.m_params.makeOtpGeoUrl(geo), OtpGeocoder.class);
+        }
+        catch(Exception e)
+        {
+            System.out.print(e);
+        }
+        return ret_val;
+    }
+
+    public OtpGeocoder solr_geocode(String geo)
+    {
+        OtpGeocoder ret_val = null;
+        try
+        {
+            ret_val = m_xml.readValue(this.m_params.makeOtpGeoUrl(geo), OtpGeocoder.class);
         }
         catch(Exception e)
         {
@@ -66,8 +80,8 @@ public class OtpClient
         ParamParser p = new ParamParser();
         OtpClient c = new OtpClient(p);
 
-        Geocoder f = c.geocode(from);
-        Geocoder t = c.geocode(to);
+        OtpGeocoder f = c.otp_geocode(from);
+        OtpGeocoder t = c.otp_geocode(to);
         //System.out.println(f.getNamedLatLon());
 
         p.setFrom(f.getNamedLatLon());

@@ -20,7 +20,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlText;
  *     </results>
  * </geocoderResults> 
  */
-public class Geocoder
+public class SolrGeocoder
 {
     public Integer count;
     public Geocode results[];
@@ -76,7 +76,7 @@ public class Geocoder
         if(args.length >= 1) file = args[0];
 
         XmlMapper xmlMapper = new XmlMapper();
-        Geocoder geo = xmlMapper.readValue(new File(file), Geocoder.class);
+        SolrGeocoder geo = xmlMapper.readValue(new File(file), SolrGeocoder.class);
         System.out.println(geo.results[0].description);
    }
 }

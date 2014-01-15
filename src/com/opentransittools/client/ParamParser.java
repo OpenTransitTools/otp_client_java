@@ -21,21 +21,31 @@ public class ParamParser
     protected String m_arriveBy        = null;
 
     protected String m_service;
-    protected String m_geocode;
+    protected String m_otp_geocode;
+    protected String m_solr_geocode;
 
     public ParamParser()
     {
         this.m_service = "http://maps.trimet.org/prod";
-        this.m_geocode = "http://maps.trimet.org/geocoder/geocode";
+        this.m_otp_geocode  = "http://maps.trimet.org/geocoder/geocode";
+        this.m_solr_geocode = "http://maps.trimet.org/solr/select";
     }
 
-    public URL makeGeoUrl(String geo) throws Exception
+    public URL makeOtpGeoUrl(String geo) throws Exception
     {
-        String url = String.format("%s?address=%s", m_geocode, urlEncode(geo));
-        System.out.print("URL: " + url);
+        String url = String.format("%s?address=%s", m_otp_geocode, urlEncode(geo));
+        System.out.print("OTP GEOCODE URL: " + url);
         return new URL(url);
     }
-    
+
+    /** http://maps.trimet.org/solr/select?start=0&rows=10&wt=json&qt=dismax&q=pdx */
+    public URL makeSolrGeoUrl(String geo) throws Exception
+    {
+        String url = String.format("%s?start=0&rows=10&wt=json&qt=dismax&q=%s", m_solr_geocode, urlEncode(geo));
+        System.out.print("SOLR GEOCODE URL: " + url);
+        return new URL(url);
+    }
+
     public URL makeOtpUrl() throws Exception
     {
         String url = String.format("%s?fromPlace=%s&toPlace=%s&numItins=%s", m_service, urlEncode(m_from), urlEncode(m_to), m_itins);
@@ -45,7 +55,7 @@ public class ParamParser
         if(m_date  != null)    url = url + "&date=" + m_date;
         if(m_arriveBy != null) url = url + "&arriveBy=" + m_arriveBy;
         if(m_maxWalkDistance != null) url = url + "&maxWalkDistance=" + m_maxWalkDistance;
-        System.out.print("URL: " + url);
+        System.out.print("OTP TRIP URL: " + url);
         return new URL(url);
     }
 
