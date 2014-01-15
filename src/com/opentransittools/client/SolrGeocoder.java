@@ -117,14 +117,16 @@ public class SolrGeocoder
         ObjectMapper jsonMapper = new ObjectMapper();
         SolrResponse rep = jsonMapper.readValue(new File(file), SolrResponse.class);
         SolrGeocoder geo = rep.response;
-        String r = geo.getNamedLatLon();
-        if(r != null)
-            System.out.println(r);
-        /*
-        else {
-            for(String l : geo.getNamedLatLonList())
-                System.out.println(l);
+        if(geo != null)
+        {
+            String r = geo.getNamedLatLon();
+            if(r != null)
+                System.out.println(r);
+            else
+            {
+                for(String l : geo.getNamedLatLonList())
+                    System.out.println(l);
+            }
         }
-        */
    }
 }
