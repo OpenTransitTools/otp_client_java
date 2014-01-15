@@ -1,6 +1,7 @@
 package com.opentransittools.client;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -77,8 +78,26 @@ public class SolrGeocoder
     public String getNamedLatLon()
     {
         String ret_val = null;
-        if(this.results != null && this.count > 0)
-            ret_val = getNamedLatLon(this.results[0]);
+        if(this.results != null && this.results.length > 0)
+        {
+            if(this.results.length == 0)
+                ret_val = getNamedLatLon(this.results[0]);
+            else if(this.results[0].score > this.results[1].score * 2)
+                ret_val = getNamedLatLon(this.results[0]);
+        }
+        return ret_val;
+    }
+
+    public List<String> getNamedLatLonList()
+    {
+        List<String> ret_val = new ArrayList<String>();
+        if(this.results != null)
+        for(Geocode g : this.results)
+        {
+            String r = g.getNamedLatLon();
+            if(r != null)
+                ret_val.add(r);
+        }
         return ret_val;
     }
 
@@ -98,6 +117,14 @@ public class SolrGeocoder
         ObjectMapper jsonMapper = new ObjectMapper();
         SolrResponse rep = jsonMapper.readValue(new File(file), SolrResponse.class);
         SolrGeocoder geo = rep.response;
-        System.out.println(geo.getNamedLatLon());
+        String r = geo.getNamedLatLon();
+        if(r != null)
+            System.out.println(r);
+        /*
+        else {
+            for(String l : geo.getNamedLatLonList())
+                System.out.println(l);
+        }
+        */
    }
 }
