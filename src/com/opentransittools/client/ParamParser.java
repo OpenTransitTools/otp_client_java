@@ -26,13 +26,15 @@ public class ParamParser
 
     public ParamParser()
     {
-        this.m_service = "http://maps.trimet.org/prod";
+        // TODO: .properties file
+        this.m_service      = "http://maps.trimet.org/prod";
         this.m_otp_geocode  = "http://maps.trimet.org/geocoder/geocode";
         this.m_solr_geocode = "http://maps.trimet.org/solr/select";
     }
 
     public URL makeOtpGeoUrl(String geo) throws Exception
     {
+        // TODO: .properties file
         String url = String.format("%s?address=%s", m_otp_geocode, urlEncode(geo));
         System.out.print("OTP GEOCODE URL: " + url);
         return new URL(url);
@@ -41,6 +43,7 @@ public class ParamParser
     /** http://maps.trimet.org/solr/select?start=0&rows=10&wt=json&qt=dismax&q=pdx */
     public URL makeSolrGeoUrl(String geo) throws Exception
     {
+        // TODO: .properties file
         String url = String.format("%s?start=0&rows=10&wt=json&qt=dismax&q=%s", m_solr_geocode, urlEncode(geo));
         System.out.print("SOLR GEOCODE URL: " + url);
         return new URL(url);
@@ -48,6 +51,7 @@ public class ParamParser
 
     public URL makeOtpUrl() throws Exception
     {
+        // TODO: .properties file
         String url = String.format("%s?fromPlace=%s&toPlace=%s&numItins=%s", m_service, urlEncode(m_from), urlEncode(m_to), m_itins);
         if(m_mode  != null)    url = url + "&mode=" + m_mode;
         if(m_min   != null)    url = url + "&min="  + m_min;

@@ -4,6 +4,7 @@ import java.net.URL;
 
 import com.opentransittools.client.TripPlan;
 import com.opentransittools.client.OtpGeocoder;
+import com.opentransittools.client.SolrGeocoder;
 import com.opentransittools.client.ParamParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
@@ -56,12 +57,12 @@ public class OtpClient
         return ret_val;
     }
 
-    public OtpGeocoder solr_geocode(String geo)
+    public SolrGeocoder solr_geocode(String geo)
     {
-        OtpGeocoder ret_val = null;
+        SolrGeocoder ret_val = null;
         try
         {
-            ret_val = m_xml.readValue(this.m_params.makeOtpGeoUrl(geo), OtpGeocoder.class);
+            ret_val = m_xml.readValue(this.m_params.makeOtpGeoUrl(geo), SolrGeocoder.class);
         }
         catch(Exception e)
         {
