@@ -7,7 +7,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-//  http://www.cowtowncoder.com/blog/archives/2012/03/entry_467.html
 
 /**
  * "response":{
@@ -21,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SolrGeocoder
 {
+
     @JsonProperty("numFound")
     public Integer count;
 
@@ -30,6 +30,13 @@ public class SolrGeocoder
     @JsonProperty("error")
     public Error errror;
 
+    /** NOTE: I'm an inner class that represents the outer SOLR response */
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class SolrResponse
+    {
+        @JsonProperty("response")
+        public SolrGeocoder response;
+    }
 
     /** 
      *  {"id":"airport-214-5", "type":"2",   "type_name":"Airport","name":"PDX","address":"7000 NE Airport Way","city":"Portland","lon":-122.599266,"lat":45.58985,"score":12.36915},
@@ -89,7 +96,8 @@ public class SolrGeocoder
         if(args.length >= 1) file = args[0];
 
         ObjectMapper jsonMapper = new ObjectMapper();
-        SolrGeocoder geo = jsonMapper.readValue(new File(file), SolrGeocoder.class);
+        SolrResponse rep = jsonMapper.readValue(new File(file), SolrResponse.class);
+        SolrGeocoder geo = rep.response;
         System.out.println(geo.getNamedLatLon());
    }
 }

@@ -50,9 +50,16 @@
             <!- - -->
         </java>
 
-        <!-- TEST via .xml file -->
+        <!-- SOLR GEOCODER TEST via .json file -->
+        <!-- -->
+        <java classname="com.opentransittools.client.SolrGeocoder" fork="false" classpathref="classpath">
+            <arg value="${src.dir}/${test.dir}/geocode.json"/>
+        </java>
+        <!-- -->
+
+        <!-- OTP GEOCODER TEST via .xml file -->
         <!-- - ->
-        <java classname="com.opentransittools.client.Geocoder" fork="false" classpathref="classpath">
+        <java classname="com.opentransittools.client.OtpGeocoder" fork="false" classpathref="classpath">
             <arg value="${src.dir}/${test.dir}/geocode.xml"/>
         </java>
         <!- - -->
