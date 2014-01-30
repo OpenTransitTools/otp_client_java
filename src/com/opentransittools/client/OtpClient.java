@@ -81,9 +81,9 @@ public class OtpClient
         ParamParser p = new ParamParser();
         OtpClient c = new OtpClient(p);
 
-        OtpGeocoder f = c.otp_geocode(from);
-        OtpGeocoder t = c.otp_geocode(to);
-        //System.out.println(f.getNamedLatLon());
+        SolrGeocoder f = c.solr_geocode(from);
+        SolrGeocoder t = c.solr_geocode(to);
+        System.out.println(f.getNamedLatLon());
 
         p.setFrom(f.getNamedLatLon());
         p.setTo(t.getNamedLatLon());
