@@ -63,7 +63,7 @@ public class OtpClient
         try
         {
             URL url = this.m_params.makeSolrGeoUrl(geo);
-            ret_val = m_json.readValue(url, SolrGeocoder.class);
+            ret_val = SolrGeocoder.make_geocode(url, m_json);
         }
         catch(Exception e)
         {

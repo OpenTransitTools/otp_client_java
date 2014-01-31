@@ -147,7 +147,7 @@ public class SolrGeocoder
 
         ParamParser p = new ParamParser();
         URL url = p.makeSolrGeoUrl(geo);
-        SolrGeocoder s = make_geocode(url);
+        SolrGeocoder s = SolrGeocoder.make_geocode(url);
         System.out.println(s.getNamedLatLon());
     }
 
