@@ -1,6 +1,6 @@
 package com.opentransittools.client;
-
 import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,8 +15,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *    "start":0,
  *    "maxScore":12.36915,
  *    "docs":[
- *        {"id":"airport-214-5", "type":"2",   "type_name":"Airport","name":"PDX","address":"7000 NE Airport Way","city":"Portland","lon":-122.599266,"lat":45.58985,"score":12.36915},
- *        {"id":"stops-10574",   "type":"stop","type_name":"Stop ID","name":"Cascades MAX", (no address element)  "city":"Portland","lon":-122.55829, "lat":45.57239,"score":1.8827744, "vtype":"5","stop_id":"10574","amenities":"Bench;Schedule Display;Shelter;Garbage Can;Lighting at Stop;Ticket Machine","routes":"90::MAX Red Line:","route_stops":",\"MAX Red Line\",0,\"To Portland International Airport\",true,false,false",}
+ *        {"id":"airport-214-5", "type":"2",   "type_name":"Airport","name":"XXXXXXX","address":"XXXXX NE Airport Way","city":"Xxxxland","lon":-XXX.XXXX,"lat":XX.XXXX,"score":XX.XXXXX},
+ *        {"id":"stops-10574",   "type":"stop","type_name":"Stop ID","name":"XXXXX MAX", (no address element) "city":"Zzzzland","lon":-ZZZ.ZZZZZ, "lat":ZZ.ZZZZZZ,"score":1.8827744, "vtype":"5","stop_id":"10574","amenities":"Bench;Schedule Display;Shelter;Garbage Can;Lighting at Stop;Ticket Machine","routes":"90::MAX Red Line:","route_stops":",\"MAX Red Line\",0,\"To Portland International Airport\",true,false,false",}
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SolrGeocoder
@@ -40,7 +40,7 @@ public class SolrGeocoder
     }
 
     /** 
-     *  {"id":"airport-214-5", "type":"2",   "type_name":"Airport","name":"PDX","address":"7000 NE Airport Way","city":"Portland","lon":-122.599266,"lat":45.58985,"score":12.36915},
+     *  {"id":"airport-214-5", "type":"2",   "type_name":"Airport","name":"ZZZX","address":"ZZZZZ NE Airport Way","city":"Zzzzzland","lon":-ZZZ.ZZZZZZ,"lat":ZZ.ZZZZZ,"score":12.36915},
      */
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Geocode
@@ -121,21 +121,64 @@ public class SolrGeocoder
         return ret_val;
     }
 
-    /** 
-     */
+    /** */
     public static class Error
     {
         public Integer id;
         public String msg;
     }
 
+    /** utility class to return a SolrGeocoder object */
+    public static SolrGeocoder make_geocode(URL url, ObjectMapper json) throws Exception
+    {
+        SolrResponse rep = json.readValue(url, SolrResponse.class);
+        return rep.response;
+    }
+    public static SolrGeocoder make_geocode(URL url) throws Exception
+    {
+        ObjectMapper json = new ObjectMapper();
+        return make_geocode(url, json);
+    }
+
     public static void main(String[] args) throws Exception
+    {
+        String geo = "PDX";
+        if(args.length >= 1) geo = args[0];
+
+        ParamParser p = new ParamParser();
+        URL url = p.makeSolrGeoUrl(geo);
+        SolrGeocoder s = make_geocode(url);
+        System.out.println(s.getNamedLatLon());
+    }
+
+    public static void Zmain(String[] args) throws Exception
+    {
+        String from = "PDX";
+        String to   = "ZOO";
+        if(args.length >= 1) from = args[0];
+        if(args.length >= 2) to   = args[1];
+
+        ParamParser p = new ParamParser();
+        OtpClient c = new OtpClient(p);
+
+        SolrGeocoder f = c.solr_geocode(from);
+        SolrGeocoder t = c.solr_geocode(to);
+        System.out.println(f.getNamedLatLon());
+
+        p.setFrom(f.getNamedLatLon());
+        p.setTo(t.getNamedLatLon());
+
+        TripPlan tp = c.planner();
+        System.out.print(tp.plan.from.name);
+    }
+
+    public static void Xmain(String[] args) throws Exception
     {
         String file = "geocode.json";
         if(args.length >= 1) file = args[0];
 
-        ObjectMapper jsonMapper = new ObjectMapper();
-        SolrResponse rep = jsonMapper.readValue(new File(file), SolrResponse.class);
+        ObjectMapper json = new ObjectMapper();
+        SolrResponse rep = json.readValue(new File(file), SolrResponse.class);
         SolrGeocoder geo = rep.response;
         if(geo != null)
         {

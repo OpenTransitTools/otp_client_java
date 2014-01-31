@@ -62,7 +62,8 @@ public class OtpClient
         SolrGeocoder ret_val = null;
         try
         {
-            ret_val = m_xml.readValue(this.m_params.makeOtpGeoUrl(geo), SolrGeocoder.class);
+            URL url = this.m_params.makeSolrGeoUrl(geo);
+            ret_val = m_json.readValue(url, SolrGeocoder.class);
         }
         catch(Exception e)
         {
