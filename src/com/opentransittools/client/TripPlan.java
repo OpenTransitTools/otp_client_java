@@ -1,5 +1,7 @@
 package com.opentransittools.client;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -57,7 +59,7 @@ public class TripPlan
         @JsonProperty("itineraries")
         public Itinerary itineraries[];
 
-        @JsonIgnoreProperties({"geometry"})
+        @JsonIgnoreProperties(ignoreUnknown = true)
         public static class Place
         {
             @JsonProperty("name")
@@ -72,6 +74,8 @@ public class TripPlan
             public Stop stopId;
             @JsonProperty("stopCode")
             public String stopCode;
+            @JsonProperty("stopIndex")
+            public String stopIndex;
             @JsonProperty("arrival")
             public String arrival;
             @JsonProperty("departure")
@@ -239,8 +243,10 @@ public class TripPlan
                 @JsonProperty("stayOn")
                 public Boolean stayOn;
 
-                @JsonProperty("elevation")
-                public String elevation;
+                // NOTE: not using elevation in my work...the String used to work with older
+                //       version of OTP, but no longer.  Jackson mentions something about an array 
+                //@JsonProperty("elevation")
+                //public String elevation;
             }
 
             /**
