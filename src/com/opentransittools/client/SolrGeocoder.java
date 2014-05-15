@@ -148,28 +148,8 @@ public class SolrGeocoder
         ParamParser p = new ParamParser();
         URL url = p.makeSolrGeoUrl(geo);
         SolrGeocoder s = SolrGeocoder.make_geocode(url);
+        System.out.println();
         System.out.println(s.getNamedLatLon());
-    }
-
-    public static void Zmain(String[] args) throws Exception
-    {
-        String from = "PDX";
-        String to   = "ZOO";
-        if(args.length >= 1) from = args[0];
-        if(args.length >= 2) to   = args[1];
-
-        ParamParser p = new ParamParser();
-        OtpClient c = new OtpClient(p);
-
-        SolrGeocoder f = c.solr_geocode(from);
-        SolrGeocoder t = c.solr_geocode(to);
-        System.out.println(f.getNamedLatLon());
-
-        p.setFrom(f.getNamedLatLon());
-        p.setTo(t.getNamedLatLon());
-
-        TripPlan tp = c.planner();
-        System.out.print(tp.plan.from.name);
     }
 
     public static void Xmain(String[] args) throws Exception

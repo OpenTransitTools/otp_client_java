@@ -41,6 +41,13 @@
         </jar>
     </target>
 
+    <target name="geo" depends="jar">
+        <!-- SOLR GEOCODER TEST via .json file -->
+        <java classname="com.opentransittools.client.SolrGeocoder" fork="false" classpathref="classpath">
+            <arg value="834 SE Lambert"/>
+        </java>
+    </target>
+
     <target name="run" depends="jar">
         <!-- RUN app by calling OTP via URL -->
         <!-- -->
@@ -50,20 +57,6 @@
             <arg value="SW PACIFIC HWY @ SW BEEF BEND RD::45.411448,-122.793718"/>
         <!- - -->
         </java>
-        <!-- -->
-        <!-- SOLR GEOCODER TEST via .json file -->
-        <!-- - ->
-        <java classname="com.opentransittools.client.SolrGeocoder" fork="false" classpathref="classpath">
-            <arg value="${src.dir}/${test.dir}/geocode.json"/>
-        </java>
-        <!- - -->
-
-        <!-- OTP GEOCODER TEST via .xml file -->
-        <!-- - ->
-        <java classname="com.opentransittools.client.OtpGeocoder" fork="false" classpathref="classpath">
-            <arg value="${src.dir}/${test.dir}/geocode.xml"/>
-        </java>
-        <!- - -->
 
         <!-- TEST via .json files -->
         <!-- 
