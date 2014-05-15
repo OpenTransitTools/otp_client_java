@@ -90,6 +90,9 @@ public class OtpClient
         p.setTo(t.getNamedLatLon());
 
         TripPlan tp = c.planner();
+        System.out.print("\nOUTPUT:");
         System.out.print(tp.plan.from.name);
+        System.out.print("  Trip durration = " + tp.plan.itineraries[0].duration);
+        System.out.print("  Num transfers = " + tp.plan.itineraries[0].transers);
     }
 }
