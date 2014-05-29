@@ -138,20 +138,23 @@ public class SolrGeocoder
         ObjectMapper json = new ObjectMapper();
         return make_geocode(url, json);
     }
-    public static SolrGeocoder make_geocode(String search) throws Exception
+    public static SolrGeocoder make_geocode(String search_term) throws Exception
     {
         ParamParser p = new ParamParser();
-        URL url = p.makeSolrGeoUrl(geo);
+        URL url = p.makeSolrGeoUrl(search_term);
         return make_geocode(url);
     }
 
     public static void main(String[] args) throws Exception
     {
-        String geo = "PDX";
-        if(args.length >= 1) geo = args[0];
+        String search_term = "PDX";
+        if(args.length >= 1) search_term = args[0];
+
+        SolrGeocoder geo = SolrGeocoder.make_geocode(search_term);
+        String out = geo.getNamedLatLon();
 
         System.out.println();
-        System.out.println(s.getNamedLatLon());
+        System.out.println(out);
     }
 
     public static void Xmain(String[] args) throws Exception
