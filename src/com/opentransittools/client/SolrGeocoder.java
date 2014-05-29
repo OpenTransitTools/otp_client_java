@@ -21,7 +21,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SolrGeocoder
 {
-
     @JsonProperty("numFound")
     public Integer count;
 
@@ -139,15 +138,18 @@ public class SolrGeocoder
         ObjectMapper json = new ObjectMapper();
         return make_geocode(url, json);
     }
+    public static SolrGeocoder make_geocode(String search) throws Exception
+    {
+        ParamParser p = new ParamParser();
+        URL url = p.makeSolrGeoUrl(geo);
+        return make_geocode(url);
+    }
 
     public static void main(String[] args) throws Exception
     {
         String geo = "PDX";
         if(args.length >= 1) geo = args[0];
 
-        ParamParser p = new ParamParser();
-        URL url = p.makeSolrGeoUrl(geo);
-        SolrGeocoder s = SolrGeocoder.make_geocode(url);
         System.out.println();
         System.out.println(s.getNamedLatLon());
     }
