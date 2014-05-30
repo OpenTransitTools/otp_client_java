@@ -20,6 +20,19 @@ public enum Configuration
     SOLR_URL,
     ;
 
+    //final Properties properties = new Properties();
+    static Properties rb = null;
+    static {
+        try {
+            rb = new Properties();
+            rb.load(Configuration.class.getResourceAsStream("Configuration.properties"));
+            
+        }
+        catch(Exception e) {}
+    };
+    //private static ResourceBundle rb = ResourceBundle.getBundle("Configuration");
+
+
     public static Configuration construct(String value)
     {
         Configuration retVal = null;
@@ -44,15 +57,12 @@ public enum Configuration
         return retVal;
     }
 
-    //final Properties properties = new Properties();
-    //properties.load(this.getClass().getResourceAsStream("foo.properties"));
-    private static ResourceBundle rb = ResourceBundle.getBundle("Configuration");
-
     public String get() throws Exception
     {
         synchronized(Configuration.class)
         {
-            return rb.getString(name());
+            //return rb.getString(name());
+            return rb.getProperty(name());
         }
     }
 
@@ -100,7 +110,8 @@ public enum Configuration
         {
             synchronized(Configuration.class) 
             {
-                return MessageFormat.format(rb.getString(name()), args);
+                return MessageFormat.format(rb.getProperty(name()), args);
+                //return MessageFormat.format(rb.getString(name()), args);
             }
         }
         catch(Exception e)
