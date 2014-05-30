@@ -79,9 +79,7 @@ public class SolrGeocoder
         String ret_val = null;
         if(this.results != null && this.results.length > 0)
         {
-            if(this.results.length == 0)
-                ret_val = getNamedLatLon(this.results[0]);
-            else if(dominantFirst())
+            if(this.results.length == 1 || dominantFirst())
                 ret_val = getNamedLatLon(this.results[0]);
         }
         return ret_val;
@@ -97,7 +95,7 @@ public class SolrGeocoder
         boolean ret_val = false;
         if(hasResults())
         {
-            if(this.results.length == 0 || this.results[0].score > this.results[1].score * factor)
+            if(this.results.length == 1 || this.results[0].score > this.results[1].score * factor)
                 ret_val = true;
         }
         return ret_val;
