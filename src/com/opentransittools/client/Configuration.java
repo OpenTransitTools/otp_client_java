@@ -25,8 +25,7 @@ public enum Configuration
     static {
         try {
             rb = new Properties();
-            rb.load(Configuration.class.getResourceAsStream("Configuration.properties"));
-            
+            rb.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("Configuration.properties"));
         }
         catch(Exception e) {}
     };
