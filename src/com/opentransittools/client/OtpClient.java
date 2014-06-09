@@ -74,7 +74,7 @@ public class OtpClient
 
     public static void main(String[] args) throws Exception
     {
-        String from = "PDX";
+        String from = "OHSU";
         String to   = "ZOO";
         if(args.length >= 1) from = args[0];
         if(args.length >= 2) to   = args[1];
