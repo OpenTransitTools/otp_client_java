@@ -45,6 +45,14 @@ public class Utils
             return ret_val;
         }
 
+        public static Boolean isRail(String mode)
+        {
+            Boolean ret_val = false;
+            if(mode != null && mode.equals(BUS))
+                ret_val = true;
+            return ret_val;
+        }
+
         public static Boolean isTransit(String mode)
         {
             Boolean ret_val = false;
