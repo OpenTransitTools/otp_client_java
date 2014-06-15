@@ -4,7 +4,6 @@ import java.util.regex.Pattern;
 
 public class Utils
 {
-
     public static class Modes
     {
         public static String BUS     = "BUS";
@@ -62,5 +61,5 @@ public class Utils
                 ret_val = true;
             return ret_val;
         }
-   }
+    }
 }
