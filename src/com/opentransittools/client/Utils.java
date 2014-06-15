@@ -19,7 +19,9 @@ public class Utils
         public static String BICYCLE = "BICYCLE";
 
         public static String TRANSIT = BUS + "|" + TRAIN + "|" + RAIL + "|" + TRAM + "|" + GONDOLA;
+        public static String RAIL_MODES = TRAIN + "|" + RAIL + "|" + TRAM + "|" + GONDOLA;
         public static Pattern TRANSIT_PATTERN = Pattern.compile(TRANSIT);
+        public static Pattern RAIL_PATTERN = Pattern.compile(RAIL_MODES);
 
         public static Boolean isWalk(String mode)
         {
