@@ -18,9 +18,9 @@ public class Utils
         public static String WALK    = "WALK";
         public static String BICYCLE = "BICYCLE";
 
-        public static String TRANSIT = BUS + "|" + TRAIN + "|" + RAIL + "|" + TRAM + "|" + GONDOLA;
+        public static String TRANSIT_MODES = BUS + "|" + TRAIN + "|" + RAIL + "|" + TRAM + "|" + GONDOLA;
         public static String RAIL_MODES = TRAIN + "|" + RAIL + "|" + TRAM + "|" + GONDOLA;
-        public static Pattern TRANSIT_PATTERN = Pattern.compile(TRANSIT);
+        public static Pattern TRANSIT_PATTERN = Pattern.compile(TRANSIT_MODES);
         public static Pattern RAIL_PATTERN = Pattern.compile(RAIL_MODES);
 
         public static Boolean isWalk(String mode)
@@ -50,7 +50,7 @@ public class Utils
         public static Boolean isRail(String mode)
         {
             Boolean ret_val = false;
-            if(mode != null && mode.equals(BUS))
+            if(mode != null && mode.matches(TRANSIT_MODES))
                 ret_val = true;
             return ret_val;
         }
@@ -58,7 +58,7 @@ public class Utils
         public static Boolean isTransit(String mode)
         {
             Boolean ret_val = false;
-            if(mode != null && mode.matches(TRANSIT))
+            if(mode != null && mode.matches(TRANSIT_MODES))
                 ret_val = true;
             return ret_val;
         }
