@@ -50,7 +50,7 @@ public class Utils
         public static Boolean isRail(String mode)
         {
             Boolean ret_val = false;
-            if(mode != null && mode.matches(TRANSIT_MODES))
+            if(mode != null && mode.matches(RAIL_MODES))
                 ret_val = true;
             return ret_val;
         }
