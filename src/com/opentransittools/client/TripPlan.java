@@ -159,11 +159,37 @@ public class TripPlan
          *       "distance":7522.2365911245715,
          *       "duration":5851000,
          *
-         *       "agencyName":null,"agencyId":null,"agencyUrl":null,"agencyTimeZoneOffset":0,
-         *       "tripId":null,"tripShortName":null,"interlineWithPreviousLeg":null,
-         *       "headsign":null,
-         *       "routeId":null,"routeShortName":null,"routeLongName":null,
-         *       "routeColor":null,"routeTextColor":null,
+         *       <leg
+         *            mode="TRAM"
+         *            tripId="5032854"
+         *            tripBlockId="9050"
+         *            routeId="90"
+         *            route="MAX Red Line"
+         *            routeLongName="MAX Red Line"  
+         *            headsign="City Center & Beaverton TC" 
+         *            routeType="0" 
+         *            agencyId="TriMet" 
+         *            agencyTimeZoneOffset="0" 
+         *            agencyUrl="http://trimet.org" 
+         *            agencyName="TriMet" 
+         *       >
+         *
+         *       <leg
+         *            mode="BUS"
+         *            tripId="5022279"
+         *            tripBlockId="808"
+         *            routeId="8"
+         *            route="8"
+         *            routeShortName="8"
+         *            routeLongName="Jackson Park/NE 15th"  
+         *            headsign="Marquam Hill" 
+         *            routeType="0" 
+         *            agencyId="TriMet" 
+         *            agencyTimeZoneOffset="0" 
+         *            agencyUrl="http://trimet.org" 
+         *            agencyName="TriMet" 
+         *       >
+         *
          *       "boardRule":null,"alightRule":null,"rentedBike":null,"bogusNonTransitLeg":false,
          *
          *       "notes":[{"text":"Caution!"}],
@@ -184,6 +210,23 @@ public class TripPlan
             @JsonProperty("mode")
             public String mode;
 
+            @JsonProperty("tripId")
+            public String trip;
+            @JsonProperty("tripBlockId")
+            public String block;
+            @JsonProperty("routeId")
+            public String routeId;
+            @JsonProperty("routeShortName")
+            public String routeShortName;
+            @JsonProperty("routeLongName")
+            public String routeLongName;
+            @JsonProperty("routeType")
+            public String routeType;
+            @JsonProperty("headsign")
+            public String headsign;
+            @JsonProperty("agencyId")
+            public String agencyId;
+
             @JsonProperty("startTime")
             public Long startTime;
             @JsonProperty("endTime")
@@ -202,6 +245,34 @@ public class TripPlan
             @JsonProperty("legGeometry")
             public LegGeometry legGeometry;
 
+            /** make route and headsign string */
+            public String routeNameAndDestination(String sep)
+            {
+                String retVal = this.routeName();
+                if(this.headsign != null && this.headsign.length() > 0)
+                {
+                    retVal = retVal + sep + this.headsign;
+                    retVal = retVal.trim();
+                }
+                return retVal;
+            }
+            public String routeNameAndDestination() 
+            {
+                return routeNameAndDestination(" to ");
+            }
+
+            /** make route name */
+            public String routeName()
+            {
+                String retVal = "";
+                if(this.routeShortName != null && this.routeShortName.length() > 0)
+                    retVal = this.routeShortName;
+                if(this.routeLongName != null && this.routeLongName.length() > 0)
+                    if(retVal.length() > 0)
+                        retVal += "-";
+                    retVal += this.routeLongName;
+                return retVal;
+            }
 
             /**
              * "notes":[{"text":"Caution!"}],
