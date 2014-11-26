@@ -48,6 +48,12 @@
         </java>
     </target>
 
+    <target name="config" depends="jar">
+        <!-- Test Configuration.properties -->
+        <java classname="com.opentransittools.client.Configuration" fork="false" classpathref="classpath">
+        </java>
+    </target>
+
     <target name="run" depends="jar">
         <!-- RUN app by calling OTP via URL -->
         <!-- -->
