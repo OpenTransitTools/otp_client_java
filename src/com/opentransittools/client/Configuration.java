@@ -1,41 +1,29 @@
 package com.opentransittools.client;
 
+
 import java.text.MessageFormat;
-import java.util.Properties;
 import java.util.ResourceBundle;
 
 /**
  * The purpose of Configuration is to read a properties file, and expose the content theirin via the named enumerated params 
  * 
- * @author  Frank Purcell (purcellf@trimet.org) -- borrowed from code by Kohsuke Kawaguchi
+ * @author  Frank Purcell (purcellf@trimet.org) -- taken from code by Kohsuke Kawaguchi
  * @date    Apr 18, 2007
+ * @project tpws
  * @version Revision: 1.0
  * @since   1.0
  */
-
 public enum Configuration 
 {
     GEO_URL,
     OTP_URL,
-    SOLR_URL,
+    SOLR_URL
     ;
-
-    //final Properties properties = new Properties();
-    static Properties rb = null;
-    static {
-        try {
-            rb = new Properties();
-            rb.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("Configuration.properties"));
-        }
-        catch(Exception e) {}
-    };
-    //private static ResourceBundle rb = ResourceBundle.getBundle("Configuration");
-
 
     public static Configuration construct(String value)
     {
         Configuration retVal = null;
-
+        
         try
         {
             value = value.trim();
@@ -55,13 +43,14 @@ public enum Configuration
 
         return retVal;
     }
+    
+    private static ResourceBundle rb = ResourceBundle.getBundle(Configuration.class.getName());
 
     public String get() throws Exception
     {
         synchronized(Configuration.class)
         {
-            //return rb.getString(name());
-            return rb.getProperty(name());
+            return rb.getString(name());
         }
     }
 
@@ -83,18 +72,35 @@ public enum Configuration
     }
 
 
+    public int get(int def)
+    {
+        String tmp = get(Integer.toString(def));
+        //return IntUtils.getIntFromString(tmp);
+        return 2;
+    }    
+
+
+    public long get(long def)
+    {
+        String tmp = get(Long.toString(def));
+        //return IntUtils.getLongFromString(tmp);
+        return 2;
+    }    
+    
+
     public boolean get(boolean defVal)
     {
         boolean retVal = defVal;
         try
         {
             String r = get();
-            if(r != null && r.equalsIgnoreCase("True"))
+            if(r != null && r.equalsIgnoreCase("true"))
                 retVal = true;
         }
         catch(Exception _)
         {
         }
+
         return retVal;
     }
 
@@ -109,8 +115,7 @@ public enum Configuration
         {
             synchronized(Configuration.class) 
             {
-                return MessageFormat.format(rb.getProperty(name()), args);
-                //return MessageFormat.format(rb.getString(name()), args);
+                return MessageFormat.format(rb.getString(name()), args);
             }
         }
         catch(Exception e)
@@ -119,11 +124,10 @@ public enum Configuration
         
         return null;
     }
-
+    
     public static void main(String[] z) throws Exception
     {
-        System.out.println(Configuration.SOLR_URL.get());
         System.out.println(Configuration.OTP_URL.get());
-        System.out.println(Configuration.class.getName());
+        System.out.println(Configuration.GEO_URL.get());
     }
 }
