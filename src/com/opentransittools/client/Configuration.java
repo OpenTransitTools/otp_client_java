@@ -5,11 +5,11 @@ import java.text.MessageFormat;
 import java.util.ResourceBundle;
 
 /**
- * The purpose of Configuration is to read a properties file, and expose the content theirin via the named enumerated params 
+ * The purpose of Configuration is to read a properties file, and expose the content theirin via the 
+ * named enumerated params 
  * 
  * @author  Frank Purcell (purcellf@trimet.org) -- taken from code by Kohsuke Kawaguchi
- * @date    Apr 18, 2007
- * @project tpws
+ * @date    Dec 1, 2014
  * @version Revision: 1.0
  * @since   1.0
  */
@@ -19,7 +19,23 @@ public enum Configuration
     OTP_URL,
     SOLR_URL
     ;
-
+    
+    private static final ResourceBundle rb = getResourceBundle();
+    public static ResourceBundle getResourceBundle()
+    {
+        ResourceBundle retVal = null;
+        try {
+            retVal = ResourceBundle.getBundle(Configuration.class.getName());
+        }
+        catch(Exception e) {
+            String name = Configuration.class.getName();
+            name = name.substring(name.lastIndexOf('.')+1);
+            retVal = ResourceBundle.getBundle(name);
+        }
+        return retVal; 
+    }
+    
+    
     public static Configuration construct(String value)
     {
         Configuration retVal = null;
@@ -43,8 +59,6 @@ public enum Configuration
 
         return retVal;
     }
-    
-    private static ResourceBundle rb = ResourceBundle.getBundle(Configuration.class.getName());
 
     public String get() throws Exception
     {
