@@ -2,9 +2,9 @@ package com.opentransittools.client;
 
 import java.net.URL;
 
+import com.opentransittools.client.SolrGeocoder;
 import com.opentransittools.client.TripPlan;
 import com.opentransittools.client.OtpGeocoder;
-import com.opentransittools.client.SolrGeocoder;
 import com.opentransittools.client.ParamParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;

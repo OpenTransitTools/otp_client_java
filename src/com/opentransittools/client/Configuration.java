@@ -15,8 +15,8 @@ import java.util.ResourceBundle;
  */
 public enum Configuration 
 {
-    GEO_URL,
     OTP_URL,
+    GEOCODER_URL,
     SOLR_URL
     ;
     
@@ -142,6 +142,6 @@ public enum Configuration
     public static void main(String[] z) throws Exception
     {
         System.out.println(Configuration.OTP_URL.get());
-        System.out.println(Configuration.GEO_URL.get());
+        System.out.println(Configuration.GEOCODER_URL.get());
     }
 }

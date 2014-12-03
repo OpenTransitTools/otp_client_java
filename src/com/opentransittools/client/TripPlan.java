@@ -274,6 +274,7 @@ public class TripPlan
                 return retVal;
             }
 
+            
             /**
              * "notes":[{"text":"Caution!"}],
              * "alerts":[{"alertHeaderText":{"translations":{"entry":[{"key":"en","value":"Caution!"}]},"someTranslation":"Caution!"}}],

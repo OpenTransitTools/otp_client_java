@@ -1,7 +1,5 @@
 package com.opentransittools.client;
 
-import java.net.URL;
-
 /**
  * used to handle the different set of parameters seen in TriMets old trip web service 
  * fromPlace=Sylvania
@@ -16,7 +14,7 @@ import java.net.URL;
  */
 public class  ParamParserLegacyTM extends ParamParser
 {
-    public ParamParserLegacyTM()
+    public ParamParserLegacyTM() throws Exception
     {
         super();
     }
