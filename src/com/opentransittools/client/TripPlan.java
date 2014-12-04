@@ -14,7 +14,16 @@ public class TripPlan
     @JsonProperty("plan")
     public Plan plan;
     @JsonProperty("error")
-    public Error errror;
+    public Error error;
+
+    public String toString() {
+        String retVal = "TripPlan:";
+        if(this.plan != null)
+            retVal += this.plan.toString(); 
+        if(this.error != null)
+            retVal += this.error.toString(); 
+        return retVal;
+    }
 
     /**
      *  "plan":{"date":1387848986000,
@@ -56,6 +65,16 @@ public class TripPlan
 
         @JsonProperty("itineraries")
         public Itinerary itineraries[];
+
+        public String toString() {
+            String retVal = "";
+            if(this.itineraries != null) {
+                retVal += "\n\tPlan with " + this.itineraries.length + " itineraries:";
+                for(Itinerary i : this.itineraries)
+                    retVal += i.toString();
+            }
+            return retVal;
+        }
 
         @JsonIgnoreProperties(ignoreUnknown = true)
         public static class Place
@@ -146,6 +165,16 @@ public class TripPlan
             public Fare fare;
             @JsonProperty("legs")
             public Leg legs[];
+
+            public String toString() {
+                String retVal = "";
+                if(this.legs != null) {
+                    retVal += "\n\t\tItin with " + this.legs.length + " legs:";
+                    for(Leg l : this.legs)
+                        retVal += "\n\t\t\t: " + l.toString();
+                }
+                return retVal;
+            }
         }
 
         /**
@@ -414,5 +443,13 @@ public class TripPlan
         public Integer id;
         @JsonProperty("msg")
         public String msg;
+
+        public String toString() {
+            String retVal = "";
+            if(this.msg != null) {
+                retVal += "\n\tERROR " + this.msg;
+            }
+            return retVal;
+        }
     }
 }
