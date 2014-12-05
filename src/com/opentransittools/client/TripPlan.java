@@ -452,4 +452,14 @@ public class TripPlan
             return retVal;
         }
     }
+
+    public static String getErrorMsg(TripPlan tp, String defVal) {
+        String retVal = defVal;
+        if(tp != null && tp.error != null && tp.error.msg.length() > 0)
+            retVal = tp.error.msg;
+        return retVal;
+    }
+    public static String getErrorMsg(TripPlan tp) {
+        return getErrorMsg(tp, "Sorry, the trip planner is temporarily unavailable. Please try again later.");
+    }
 }
