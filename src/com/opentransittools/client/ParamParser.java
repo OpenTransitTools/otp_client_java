@@ -1,6 +1,7 @@
 package com.opentransittools.client;
 
 import java.net.URL;
+import java.util.logging.Logger;
 
 /**
  * ParamParser will manage the set of http get parameters for OTP (with default values)
@@ -24,6 +25,8 @@ public class ParamParser
     protected String m_otp_geocode;
     protected String m_solr_geocode;
 
+    protected static final Logger LOG = Logger.getLogger(ParamParser.class.getCanonicalName());
+
     public ParamParser() throws Exception
     {
         this.m_service      = Configuration.OTP_URL.get();
@@ -34,7 +37,7 @@ public class ParamParser
     public URL makeOtpGeoUrl(String geo) throws Exception
     {
         String url = String.format("%s?address=%s", m_otp_geocode, urlEncode(geo));
-        System.out.print("OTP GEOCODE URL: " + url);
+        LOG.info("OTP GEOCODE URL: " + url);
         return new URL(url);
     }
 
@@ -42,7 +45,7 @@ public class ParamParser
     public URL makeSolrGeoUrl(String geo) throws Exception
     {
         String url = String.format("%s?start=0&rows=10&wt=json&qt=dismax&q=%s", m_solr_geocode, urlEncode(geo));
-        System.out.print("SOLR GEOCODE URL: " + url);
+        LOG.info("SOLR GEOCODE URL: " + url);
         return new URL(url);
     }
 
@@ -55,7 +58,7 @@ public class ParamParser
         if(m_date  != null)    url = url + "&date=" + m_date;
         if(m_arriveBy != null) url = url + "&arriveBy=" + m_arriveBy;
         if(m_maxWalkDistance != null) url = url + "&maxWalkDistance=" + m_maxWalkDistance;
-        System.out.print("OTP TRIP URL: " + url);
+        LOG.info("OTP TRIP URL: " + url);
         return new URL(url);
     }
 

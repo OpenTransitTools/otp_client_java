@@ -1,6 +1,7 @@
 package com.opentransittools.client;
 
 import java.net.URL;
+import java.util.logging.Logger;
 
 import com.opentransittools.client.SolrGeocoder;
 import com.opentransittools.client.TripPlan;
@@ -22,6 +23,8 @@ public class OtpClient
     private XmlMapper    m_xml;
     private ParamParser  m_params;
 
+    protected static final Logger LOG = Logger.getLogger(OtpClient.class.getCanonicalName());
+
     public OtpClient(ParamParser p)
     {
         this.m_json = new ObjectMapper();
@@ -38,7 +41,7 @@ public class OtpClient
         }
         catch(Exception e)
         {
-            System.out.print(e);
+            LOG.severe(e.toString());
         }
         return ret_val;
     }
@@ -52,7 +55,7 @@ public class OtpClient
         }
         catch(Exception e)
         {
-            System.out.print(e);
+            LOG.severe(e.toString());
         }
         return ret_val;
     }
@@ -67,7 +70,7 @@ public class OtpClient
         }
         catch(Exception e)
         {
-            System.out.print(e);
+            LOG.severe(e.toString());
         }
         return ret_val;
     }
