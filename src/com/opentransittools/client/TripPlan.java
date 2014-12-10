@@ -19,9 +19,9 @@ public class TripPlan
     public String toString() {
         String retVal = "TripPlan:";
         if(this.plan != null)
-            retVal += this.plan.toString(); 
+            retVal += this.plan.toString();
         if(this.error != null)
-            retVal += this.error.toString(); 
+            retVal += this.error.toString();
         return retVal;
     }
 
