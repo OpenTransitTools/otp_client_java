@@ -177,11 +177,13 @@ public class ParamParser
     }
     public void setArriveBy(String arriveBy) {
         try {
-            if(arriveBy.toLowerCase()=="true")
+            String arr = arriveBy.trim().toLowerCase();
+            if(arr.matches("true") || arr.matches("a") || arr.matches("arr"))
                 this.m_arriveBy = "true";
-            if(arriveBy.toUpperCase()=="A")
-                this.m_arriveBy = "true";
+            else
+                this.m_arriveBy = "false";
         } catch(Exception e) {
+            this.m_arriveBy = "ERROR";
         }
     }
     public void setArriveBy(Boolean arriveBy) {
