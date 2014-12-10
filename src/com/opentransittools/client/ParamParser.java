@@ -173,12 +173,18 @@ public class ParamParser
     }
 
     public String getArriveBy() {
-        return m_arriveBy;
+        return this.m_arriveBy;
     }
     public void setArriveBy(String arriveBy) {
-        m_arriveBy = arriveBy;
+        try {
+            if(arriveBy.toLowerCase()=="true")
+                this.m_arriveBy = "true";
+            if(arriveBy.toUpperCase()=="A")
+                this.m_arriveBy = "true";
+        } catch(Exception e) {
+        }
     }
     public void setArriveBy(Boolean arriveBy) {
-        m_arriveBy = arriveBy.toString();
+        this.m_arriveBy = arriveBy.toString().toLowerCase();
     }
 }
