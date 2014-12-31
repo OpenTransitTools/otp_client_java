@@ -453,6 +453,18 @@ public class TripPlan
         }
     }
 
+    /** set error */
+    public static void setErrorMsg(TripPlan tp, String msg, Integer id) {
+        if(tp != null)
+        {
+            if(tp.error == null)
+                tp.error = new Error();
+            tp.error.msg = msg;
+            tp.error.id = id;
+        }
+    }
+    public static void setErrorMsg(TripPlan tp, String msg) { setErrorMsg(tp, msg, 20000); }
+
     public static String getErrorMsg(TripPlan tp, String defVal) {
         String retVal = defVal;
         if(tp != null && tp.error != null && tp.error.msg.length() > 0)

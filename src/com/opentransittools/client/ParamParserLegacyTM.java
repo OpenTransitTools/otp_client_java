@@ -42,14 +42,18 @@ public class  ParamParserLegacyTM extends ParamParser
 
     public void setTime(String time) {
         m_time = time;
+        if(m_time != null)
+            m_time = m_time.replaceAll(" ", "%20");
         if(m_date == null)
-            ; // add current date
+            ; // TODO: add current date
     }
 
     public void setDate(String date) {
         m_date = date;
+        if(m_date != null)
+            m_date = m_date.replaceAll(" ", "%20");
         if(m_time  == null)
-            ; // add current time
+            ; // TODO: add current time
     }
 
     /** 
