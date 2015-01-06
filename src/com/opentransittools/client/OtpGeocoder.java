@@ -33,6 +33,7 @@ public class OtpGeocoder
     public static class Geocode
     {
         public String description;
+        public String city;
         public Double lat;
         public Double lng;
 

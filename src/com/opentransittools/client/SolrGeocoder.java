@@ -47,6 +47,9 @@ public class SolrGeocoder
         @JsonProperty("name")
         public String description;
 
+        @JsonProperty("city")
+        public String city;
+
         @JsonProperty("lat")
         public Double lat;
 
@@ -66,6 +69,23 @@ public class SolrGeocoder
             catch(Exception e)
             {}
             return ret_val;
+        }
+
+        public String getNamedLatLonAndCity()
+        {
+            String retVal = getNamedLatLon();
+            if(city != null)
+            {
+                if(retVal == null) retVal = "";
+                retVal += "::" + city;
+            }
+            return retVal;
+        }
+        public String toString()
+        {
+            String retVal = getNamedLatLonAndCity();
+            if(retVal == null) retVal = super.toString();
+            return retVal;
         }
     }
 
@@ -143,6 +163,28 @@ public class SolrGeocoder
         return make_geocode(url);
     }
 
+    public String toString()
+    {
+        String retVal = null;
+        try
+        {
+            if(hasResults())
+            {
+                retVal = "";
+                for(Geocode r : this.results)
+                {
+                    retVal += r.toString() + "\n";
+                }
+            }
+        }
+        catch(Exception e)
+        {}
+
+        if(retVal == null)
+            retVal = super.toString();
+        return retVal;
+    }
+
     public static void main(String[] args) throws Exception
     {
         String search_term = "PDX";
@@ -151,6 +193,8 @@ public class SolrGeocoder
         SolrGeocoder geo = SolrGeocoder.make_geocode(search_term);
         String out = geo.getNamedLatLon();
 
+        System.out.println();
+        System.out.println(geo);
         System.out.println();
         System.out.println(out);
     }
