@@ -1,6 +1,7 @@
 package com.opentransittools.client;
 
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.logging.Logger;
 
 /**
@@ -90,7 +91,23 @@ public class ParamParser
         String ret_val = str;
         try
         {
+            ret_val = URLEncoder.encode(str, "UTF-8");
+        }
+        catch(Exception e) {
+            LOG.warning("OTP urlEncode: " + e);
+            ret_val = urlEncodeHack(str);
+        }
+        return ret_val;
+    }
+
+    static public String urlEncodeHack(String str)
+    {
+        String ret_val = str;
+        try
+        {
             ret_val = ret_val.replace(" ", "%20"); // spaces to %20
+            ret_val = ret_val.replace("&", "%26"); // &amp;  to %26
+            ret_val = ret_val.replace("#", "%23"); // &amp;  to %26
         }
         catch(Exception e)
         {

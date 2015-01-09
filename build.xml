@@ -63,24 +63,22 @@
 
     <target name="run" depends="jar">
         <!-- RUN app by calling OTP via URL -->
-        <!-- -->
         <java classname="com.opentransittools.client.OtpClient" fork="false" classpathref="classpath">
-        <!-- - ->
-            <arg value="PCC SYLVANIA::45.437823,-122.729955"/>
-            <arg value="SW PACIFIC HWY @ SW BEEF BEND RD::45.411448,-122.793718"/>
-        <!- - -->
+            <arg value="SE 9th Ave &amp; Lambert"/>
+            <arg value="Portland Int'l Airport -- Inside Airport; left of 2"/>
+            <arg value="NE 82nd &amp; 82nd Ave MAX Stn/I-84"/>
         </java>
+    </target>
 
+    <target name="test" depends="jar">
         <!-- TEST via .json files -->
-        <!-- 
         <java classname="com.opentransittools.test.Test" fork="false" classpathref="classpath">
-            <!- -
+            <!--
             <arg value="${src.dir}/${test.dir}/pdx_zoo.json"/>
             <arg value="${src.dir}/${test.dir}/error.json"/>
-            - ->
+            -->
             <arg value="${src.dir}/${test.dir}/bike_transit.json"/>
         </java>
-        <!- - -->
     </target>
 
     <target name="clean-build" depends="clean,jar,complete-jar"/>
