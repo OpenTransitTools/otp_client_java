@@ -66,6 +66,7 @@
         <java classname="com.opentransittools.client.OtpClient" fork="false" classpathref="classpath">
             <arg value="SE 9th Ave &amp; Lambert"/>
             <arg value="Portland Int'l Airport -- Inside Airport; left of 2"/>
+            <arg value="125 NW 20th Place Apt 501, Portland,OREGON"/>
             <arg value="NE 82nd &amp; 82nd Ave MAX Stn/I-84"/>
         </java>
     </target>
