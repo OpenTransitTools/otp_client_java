@@ -75,6 +75,11 @@ public class OtpClient
         return ret_val;
     }
 
+    public boolean isReady()
+    {
+        return this.m_params.isReady();
+    }
+
     public static void main(String[] args) throws Exception
     {
         String from = "OHSU";
@@ -92,10 +97,17 @@ public class OtpClient
         p.setFrom(f.getNamedLatLon());
         p.setTo(t.getNamedLatLon());
 
-        TripPlan tp = c.planner();
         System.out.print("\nOUTPUT:");
-        System.out.print(tp.plan.from.name);
-        System.out.print("  Trip durration = " + tp.plan.itineraries[0].duration);
-        System.out.print("  Num transfers = " + tp.plan.itineraries[0].transers);
+        if(c.isReady())
+        {
+            TripPlan tp = c.planner();
+            System.out.print(tp.plan.from.name);
+            System.out.print("  Trip durration = " + tp.plan.itineraries[0].duration);
+            System.out.print("  Num transfers = " + tp.plan.itineraries[0].transers);
+        }
+        else
+        {
+            System.out.print("\nSorry...the planner isn't ready to be called.  You might be missing a valid place to geocode, etc...");
+        }
     }
 }

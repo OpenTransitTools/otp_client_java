@@ -50,6 +50,14 @@ public class ParamParser
         return new URL(url);
     }
 
+    public boolean isReady()
+    {
+        boolean retVal = true;
+        if(this.m_from == null) retVal = false; 
+        if(this.m_to   == null) retVal = false;
+        return retVal;
+    }
+    
     public URL makeOtpUrl() throws Exception
     {
         String url = String.format("%s?fromPlace=%s&toPlace=%s&numItins=%s", m_service, urlEncode(m_from), urlEncode(m_to), m_itins);
