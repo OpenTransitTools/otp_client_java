@@ -5,6 +5,8 @@
 .settings
 COMMIT_EDITMSG
 nohup.out
+.idea
+*.iml
 .git
 .git/*
 .git/FETCH_HEAD
