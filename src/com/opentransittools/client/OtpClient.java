@@ -38,6 +38,20 @@ public class OtpClient
         try
         {
             ret_val = m_json.readValue(this.m_params.makeOtpUrl(), TripPlan.class);
+
+            // post process
+            for(TripPlan.Plan.Itinerary it : ret_val.plan.itineraries)
+            {
+                if(it != null)
+                for(TripPlan.Plan.Leg l : it.legs)
+                {
+                    if(l != null)
+                    {
+                        if(l.interlineWithPreviousLeg && it.transfers > 0)
+                            it.transfers--;
+                    }
+                }
+            }
         }
         catch(Exception e)
         {

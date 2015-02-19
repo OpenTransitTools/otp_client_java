@@ -160,7 +160,7 @@ public class TripPlan
             public Boolean tooSloped;
 
             @JsonProperty("transfers")
-            public Integer transers;
+            public Integer transfers;
             @JsonProperty("fare")
             public Fare fare;
             @JsonProperty("legs")
@@ -243,6 +243,9 @@ public class TripPlan
             public String trip;
             @JsonProperty("tripBlockId")
             public String block;
+            @JsonProperty("interlineWithPreviousLeg")
+            public Boolean interlineWithPreviousLeg = false;
+
             @JsonProperty("routeId")
             public String routeId;
             @JsonProperty("routeShortName")
