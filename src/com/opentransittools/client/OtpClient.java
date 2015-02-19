@@ -96,7 +96,7 @@ public class OtpClient
 
     public static void main(String[] args) throws Exception
     {
-        String from = "OHSU";
+        String from = "PDX";
         String to   = "ZOO";
         if(args.length >= 1) from = args[0];
         if(args.length >= 2) to   = args[1];
@@ -116,8 +116,8 @@ public class OtpClient
         {
             TripPlan tp = c.planner();
             System.out.print(tp.plan.from.name);
-            System.out.print("  Trip durration = " + tp.plan.itineraries[0].duration);
-            System.out.print("  Num transfers = " + tp.plan.itineraries[0].transers);
+            System.out.print("  Trip duration = " + tp.plan.itineraries[0].duration);
+            System.out.print("  Num transfers = " + tp.plan.itineraries[0].transfers);
         }
         else
         {
