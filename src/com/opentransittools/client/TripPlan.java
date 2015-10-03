@@ -252,6 +252,8 @@ public class TripPlan
             public String routeShortName;
             @JsonProperty("routeLongName")
             public String routeLongName;
+            @JsonProperty("route")
+            public String otpInterlineRouteName;
             @JsonProperty("routeType")
             public String routeType;
             @JsonProperty("headsign")
