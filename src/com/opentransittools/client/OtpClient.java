@@ -96,17 +96,17 @@ public class OtpClient
 
     public static void main(String[] args) throws Exception
     {
-        String from = "PDX";
-        String to   = "ZOO";
+        String from = "ZOO";
+        String to = "PDX";
         if(args.length >= 1) from = args[0];
         if(args.length >= 2) to   = args[1];
-
         ParamParser p = new ParamParser();
         OtpClient c = new OtpClient(p);
 
         SolrGeocoder f = c.solr_geocode(from);
         SolrGeocoder t = c.solr_geocode(to);
         System.out.println(f.getNamedLatLon());
+        System.out.println(t.getNamedLatLon());
 
         p.setFrom(f.getNamedLatLon());
         p.setTo(t.getNamedLatLon());
@@ -114,7 +114,10 @@ public class OtpClient
         System.out.print("\nOUTPUT:");
         if(c.isReady())
         {
+            System.out.print("Start Planning...\n");
             TripPlan tp = c.planner();
+            System.out.print("...Done Planning\n");
+            System.out.print("\n\n");
             System.out.print(tp.plan.from.name);
             System.out.print("  Trip duration = " + tp.plan.itineraries[0].duration);
             System.out.print("  Num transfers = " + tp.plan.itineraries[0].transfers);
