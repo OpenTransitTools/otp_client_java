@@ -99,17 +99,17 @@ public class SolrGeocoder
     {
         return g != null ? g.getNamedLatLon() : null;
     }
-
-    public String getNamedLatLon()
+    public String getNamedLatLon(String place)
     {
         String ret_val = null;
         if(this.results != null && this.results.length > 0)
         {
-            if(this.results.length == 1 || dominantFirst())
+            if(this.results.length == 1 || dominantFirst(place))
                 ret_val = getNamedLatLon(this.results[0]);
         }
         return ret_val;
     }
+    public String getNamedLatLon(){return getNamedLatLon("");}
 
     public boolean hasResults()
     {
@@ -139,7 +139,7 @@ public class SolrGeocoder
         if(retVal != true && dominantFirst(1.25))
         {
             // step 2a: if place we're geocoding looks like a stop, see if type 1 is stop
-            if(Utils.isStop(place) && this.results[0].type == "stop") retVal = true;
+            if(Utils.isStopId(place) && this.results[0].type.equals("stop")) retVal = true;
         }
 
         return retVal;
@@ -211,12 +211,14 @@ public class SolrGeocoder
         if(args.length >= 1) search_term = args[0];
 
         SolrGeocoder geo = SolrGeocoder.make_geocode(search_term);
-        String out = geo.getNamedLatLon();
+        String out = geo.getNamedLatLon(search_term);
 
         System.out.println();
         System.out.println(geo);
         System.out.println();
         System.out.println(out);
+        System.out.println();
+        System.out.println("is dominant first entry: " + geo.dominantFirst(search_term));
     }
 
     public static void Xmain(String[] args) throws Exception

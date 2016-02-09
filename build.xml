@@ -52,7 +52,10 @@
     <target name="geo" depends="jar">
         <!-- SOLR GEOCODER TEST via .json file -->
         <java classname="com.opentransittools.client.SolrGeocoder" fork="false" classpathref="classpath">
+            <!--
             <arg value="834 SE Lambert"/>
+            -->
+            <arg value="13733"/>
         </java>
     </target>
 

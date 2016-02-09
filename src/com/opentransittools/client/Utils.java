@@ -64,13 +64,15 @@ public class Utils
     }
 
     /** check to see if string appears to be a stop id */
-    public static boolean isStop(String place)
+    public static boolean isStopId(String place)
     {
         boolean retVal = false;
-        if(place != null)
+        if(place != null && place.length() > 0)
         {
-            if(place.indexOf(' ')   > 0) retVal = true;
-            if(place.indexOf("%20") > 0) retVal = true;
+            // if no spaces in place, assume it's an id
+            if(place.indexOf(" ")   == -1 &&
+               place.indexOf("%20") == -1)
+                retVal = true;
         }
         return retVal;
     }
