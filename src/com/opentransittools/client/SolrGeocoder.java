@@ -59,6 +59,12 @@ public class SolrGeocoder
         @JsonProperty("score")
         public Double score;
 
+        @JsonProperty("type")
+        public String type;
+
+        @JsonProperty("type_name")
+        public String typeName;
+
         public String getNamedLatLon()
         {
             String ret_val = null;
@@ -123,6 +129,20 @@ public class SolrGeocoder
     public boolean dominantFirst()
     {
         return dominantFirst(2.0);
+    }
+    public boolean dominantFirst(String place)
+    {
+        // step 1: first see if the first element by itself is dominant
+        boolean retVal = dominantFirst(2.0);
+
+        // step 2: next, let's make sure hit #1 is slightly dominant and do some other tests for dominance
+        if(retVal != true && dominantFirst(1.25))
+        {
+            // step 2a: if place we're geocoding looks like a stop, see if type 1 is stop
+            if(Utils.isStop(place) && this.results[0].type == "stop") retVal = true;
+        }
+
+        return retVal;
     }
 
     public List<String> getNamedLatLonList()

@@ -62,4 +62,16 @@ public class Utils
             return ret_val;
         }
     }
+
+    /** check to see if string appears to be a stop id */
+    public static boolean isStop(String place)
+    {
+        boolean retVal = false;
+        if(place != null)
+        {
+            if(place.indexOf(' ')   > 0) retVal = true;
+            if(place.indexOf("%20") > 0) retVal = true;
+        }
+        return retVal;
+    }
 }
