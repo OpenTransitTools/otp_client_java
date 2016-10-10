@@ -132,12 +132,12 @@ public class OtpClient
         if(args[0].endsWith(".json"))
             file = args[0];
         else if (args[0].equals("old"))
-            file = " src/com/opentransittools/test/old/pdx_zoo.json";
+            file = "src/com/opentransittools/test/old/pdx_zoo.json";
         else
-            file = " src/com/opentransittools/test/new/pdx_zoo.json";
+            file = "src/com/opentransittools/test/new/pdx_zoo.json";
 
 
-        TripPlan tp = TripPlan.planFromFile(Paths.get(file).toString());
+        TripPlan tp = TripPlan.planFromFile(Paths.get(file).toAbsolutePath().toString());
         print(tp);
     }
 
