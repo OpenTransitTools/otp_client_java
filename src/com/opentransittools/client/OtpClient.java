@@ -1,5 +1,6 @@
 package com.opentransittools.client;
 
+import java.nio.file.Paths;
 import java.net.URL;
 import java.util.logging.Logger;
 
@@ -94,7 +95,7 @@ public class OtpClient
         return this.m_params.isReady();
     }
 
-    public static void main(String[] args) throws Exception
+    public static void client(String[] args) throws Exception
     {
         String from = "ZOO";
         String to = "PDX";
@@ -117,14 +118,43 @@ public class OtpClient
             System.out.print("Start Planning...\n");
             TripPlan tp = c.planner();
             System.out.print("...Done Planning\n");
-            System.out.print("\n\n");
-            System.out.print(tp.plan.from.name);
-            System.out.print("  Trip duration = " + tp.plan.itineraries[0].duration);
-            System.out.print("  Num transfers = " + tp.plan.itineraries[0].transfers);
+            print(tp);
         }
         else
         {
             System.out.print("\nSorry...the planner isn't ready to be called.  You might be missing a valid place to geocode, etc...");
         }
+    }
+
+    public static void replan(String[] args) throws Exception
+    {
+        String file;
+        if(args[0].endsWith(".json"))
+            file = args[0];
+        else if (args[0].equals("old"))
+            file = " src/com/opentransittools/test/old/pdx_zoo.json";
+        else
+            file = " src/com/opentransittools/test/new/pdx_zoo.json";
+
+
+        TripPlan tp = TripPlan.planFromFile(Paths.get(file).toString());
+        print(tp);
+    }
+
+    public static void print(TripPlan tp) throws Exception
+    {
+        System.out.print("\n\n");
+        System.out.print(tp.plan.from.name);
+        System.out.print("  Trip duration = " + tp.plan.itineraries[0].duration);
+        System.out.print("  Num transfers = " + tp.plan.itineraries[0].transfers);
+    }
+
+    public static void main(String[] args) throws Exception
+    {
+        System.out.print(args[0]);
+        if(args.length > 0 && (args[0].endsWith(".json") || args[0].equals("old") || args[0].equals("new") ))
+            replan(args);
+        else
+            client(args);
     }
 }

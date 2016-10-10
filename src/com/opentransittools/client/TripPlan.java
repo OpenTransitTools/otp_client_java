@@ -1,7 +1,11 @@
 package com.opentransittools.client;
 
+import java.io.File;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 
 /**
  * NOTE:not all elements are being reflected back by this class...I've chosen a sub-set of elements that I'm interested in.
@@ -478,5 +482,12 @@ public class TripPlan
     }
     public static String getErrorMsg(TripPlan tp) {
         return getErrorMsg(tp, "Sorry, the trip planner is temporarily unavailable. Please try again later.");
+    }
+
+    public static TripPlan planFromFile(String filePath) throws Exception
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        TripPlan p = mapper.readValue(new File(filePath), TripPlan.class);
+        return p;
     }
 }
