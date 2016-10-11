@@ -484,9 +484,8 @@ public class TripPlan
         return getErrorMsg(tp, "Sorry, the trip planner is temporarily unavailable. Please try again later.");
     }
 
-    public static TripPlan planFromFile(String filePath) throws Exception
+    public static TripPlan planFromFile(ObjectMapper mapper, String filePath) throws Exception
     {
-        ObjectMapper mapper = new ObjectMapper();
         TripPlan p = mapper.readValue(new File(filePath), TripPlan.class);
         return p;
     }

@@ -9,6 +9,8 @@ import com.opentransittools.client.TripPlan;
 import com.opentransittools.client.OtpGeocoder;
 import com.opentransittools.client.ParamParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 
@@ -28,12 +30,19 @@ public class OtpClient
 
     public OtpClient(ParamParser p)
     {
-        this.m_json = new ObjectMapper();
+        this.m_json = OtpClient.jsonMapper();
         this.m_xml  = new XmlMapper();
         this.m_params = p;
     }
 
-    public TripPlan planner() 
+    public static ObjectMapper jsonMapper()
+    {
+        ObjectMapper om = new ObjectMapper();
+        om.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+        return om;
+    }
+
+    public TripPlan planner()
     {
         TripPlan ret_val = null;
         try
@@ -135,9 +144,9 @@ public class OtpClient
             file = "src/com/opentransittools/test/old/pdx_zoo.json";
         else
             file = "src/com/opentransittools/test/new/pdx_zoo.json";
+        String path = Paths.get(file).toAbsolutePath().toString();
 
-
-        TripPlan tp = TripPlan.planFromFile(Paths.get(file).toAbsolutePath().toString());
+        TripPlan tp = TripPlan.planFromFile(OtpClient.jsonMapper(), path);
         print(tp);
     }
 
