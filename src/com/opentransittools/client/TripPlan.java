@@ -281,7 +281,7 @@ public class TripPlan
             @JsonProperty("routeLongName")
             public String routeLongName;
             @JsonProperty("route")
-            public String otpInterlineRouteName;
+            public String route;  // was otpInterlineRouteName;
             @JsonProperty("routeType")
             public String routeType;
             @JsonProperty("headsign")
@@ -330,9 +330,15 @@ public class TripPlan
                 if(this.routeShortName != null && this.routeShortName.length() > 0)
                     retVal = this.routeShortName;
                 if(this.routeLongName != null && this.routeLongName.length() > 0)
-                    if(retVal.length() > 0)
+                {
+                    if (retVal.length() > 0)
                         retVal += "-";
-                retVal += this.routeLongName;
+                    retVal += this.routeLongName;
+                }
+                // OTP 1.0 puts the full route name into 'route' element
+                if (retVal.length() <= 0 && this.route != null && this.route.length() > 0)
+                    retVal = this.route;
+
                 return retVal;
             }
 
