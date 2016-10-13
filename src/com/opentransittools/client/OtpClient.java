@@ -137,16 +137,26 @@ public class OtpClient
 
     public static void replan(String[] args) throws Exception
     {
+        Boolean isNew = false;
+
         String file;
         if(args[0].endsWith(".json"))
             file = args[0];
-        else if (args[0].equals("old"))
-            file = "src/com/opentransittools/test/old/pdx_zoo.json";
-        else
+        else if (args[0].equals("new")) {
             file = "src/com/opentransittools/test/new/pdx_zoo.json";
+            isNew = true;
+        }
+        else {
+            file = "src/com/opentransittools/test/old/pdx_zoo.json";
+        }
         String path = Paths.get(file).toAbsolutePath().toString();
 
-        TripPlan tp = TripPlan.planFromFile(OtpClient.jsonMapper(), path);
+        TripPlan tp = null;
+        if(isNew)
+            tp = TripPlan_version_1_0.planFromFile(OtpClient.jsonMapper(), path);
+        else
+            tp = TripPlan.planFromFile(OtpClient.jsonMapper(), path);
+
         print(tp);
     }
 

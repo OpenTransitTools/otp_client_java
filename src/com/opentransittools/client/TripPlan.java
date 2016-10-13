@@ -106,12 +106,31 @@ public class TripPlan
             public String orig;
             @JsonProperty("zoneId")
             public String zoneId;
-
+            
             /**
-             * {"agencyId":"TriMet","id":"10579"}
+             * old 0.10.x version:
+             * stopId:{"agencyId":"TriMet","id":"10579"}
+             *
+             * new 1.0 version:
+             * stopId:"TriMet:10579"
              */
             public static class Stop
             {
+                public Stop()
+                {
+                    // dummy constructor
+                    // @see http://stackoverflow.com/questions/7625783/jsonmappingexception-no-suitable-constructor-found-for-type-simple-type-class
+                }
+
+                public Stop(String agencyStopId)
+                {
+                    //isVersion_1_0 = true;
+
+                    String z[] = agencyStopId.split(":");
+                    this.agencyId = z[0];
+                    this.id = z[1];
+                }
+
                 @JsonProperty("agencyId")
                 public String agencyId;
 
