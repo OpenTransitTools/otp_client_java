@@ -106,7 +106,7 @@ public class TripPlan
             public String orig;
             @JsonProperty("zoneId")
             public String zoneId;
-            
+
             /**
              * old 0.10.x version:
              * stopId:{"agencyId":"TriMet","id":"10579"}
