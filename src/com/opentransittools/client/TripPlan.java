@@ -116,26 +116,30 @@ public class TripPlan
              */
             public static class Stop
             {
-                public Stop()
-                {
-                    // dummy constructor
-                    // @see http://stackoverflow.com/questions/7625783/jsonmappingexception-no-suitable-constructor-found-for-type-simple-type-class
-                }
-
-                public Stop(String agencyStopId)
-                {
-                    //isVersion_1_0 = true;
-
-                    String z[] = agencyStopId.split(":");
-                    this.agencyId = z[0];
-                    this.id = z[1];
-                }
-
                 @JsonProperty("agencyId")
                 public String agencyId;
 
                 @JsonProperty("id")
                 public String id;
+
+                /**
+                 // dummy constructor called when we get objects that will be mapped with @JsonProperty
+                 // @see http://stackoverflow.com/questions/7625783/jsonmappingexception-no-suitable-constructor-found-for-type-simple-type-class
+                 */
+                public Stop()
+                {
+                }
+
+                /**
+                 * string value constructor called for new OTP's stopId:"Agency:Id" string format
+                 */
+                public Stop(String agencyStopId)
+                {
+                    //isVersion_1_0 = true;
+                    String z[] = agencyStopId.split(":");
+                    this.agencyId = z[0];
+                    this.id = z[1];
+                }
             }
         }
 
