@@ -506,6 +506,14 @@ public class TripPlan
                     @JsonProperty("cents")
                     public Integer cents;
 
+                    public String toString() {
+                        String retVal = "";
+                        if(this.cents != null)
+                            retVal += String.format("\n\t\tcents %d", this.cents);
+                        if(this.currency != null)
+                            retVal += String.format("\n\t\tcurrency %s", this.currency.toString());
+                        return retVal;
+                    }
 
                     /**
                      * "currency":{"symbol":"$","currency":"USD","currencyCode":"USD","defaultFractionDigits":2}
@@ -520,6 +528,12 @@ public class TripPlan
                         public String currencyCode;
                         @JsonProperty("defaultFractionDigits")
                         public Integer defaultFractionDigits;
+
+                        public String toString() {
+                            String retVal = null;
+                            retVal = String.format("symbol %s, currency %s, curencyCode %s, digits %d", symbol, currency, currencyCode, defaultFractionDigits);
+                            return retVal;
+                        }
                     }
                 }
             }
