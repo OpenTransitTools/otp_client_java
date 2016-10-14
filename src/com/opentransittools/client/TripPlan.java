@@ -74,7 +74,7 @@ public class TripPlan
         public String toString() {
             String retVal = "";
             if(this.itineraries != null) {
-                retVal += "\n\tPlan with " + this.itineraries.length + " itineraries:";
+                retVal += String.format("\n\nPlan with %d itineraries (on date %s, %s -to- %s):\n\n", this.itineraries.length, this.date, this.from.toString(), this.to.toString());
                 int n = 1;
                 for(Itinerary i : this.itineraries) {
                     retVal += String.format("Itinerary #%d: %s %s\n", n, this.from.toString("FROM: "), this.to.toString("TO: "));
@@ -221,6 +221,13 @@ public class TripPlan
 
             public String toString() {
                 String retVal = "";
+
+                retVal += String.format("\n\tduration %d, start %d, end %d, walk %d, transit %d, wait %d", duration, startTime, endTime, walkTime, transitTime, waitingTime);
+                retVal += String.format("\n\twalk dist %f, lost %f, gain %f, transfers %d", walkDistance, elevationLost, elevationGained, transfers);
+                if(fare != null)
+                    retVal += String.format("\n\tfare: %s", fare.toString());
+                retVal += "\n";
+
                 if(this.legs != null) {
                     int n = 1;
                     for(Leg l : this.legs) {
@@ -340,6 +347,20 @@ public class TripPlan
                 retVal += String.format("\n\t\tStart %d End %d", startTime, endTime);
                 if(routeId != null)
                     retVal += String.format("\n\t\trouteId=%s, route=%s, routeShortName=%s, routeLongName=%s", routeId, route, routeShortName, routeLongName);
+
+                if(steps != null) {
+                    String sstr = "\n\t\tsteps:";
+                    for (Step s : steps)
+                        sstr += "\n\t\t\t" + s.toString();
+                    retVal += sstr + "\n";
+                }
+
+                if(notes != null) {
+                    String nstr = "\n\t\tnotes:";
+                    for (Note n : notes)
+                        nstr += "\n\t\t\t" + n.toString();
+                    retVal += nstr  + "\n";
+                }
                 return retVal;
             }
             public String toString() {
@@ -390,6 +411,10 @@ public class TripPlan
             {
                 @JsonProperty("text")
                 public String text;
+
+                public String toString() {
+                    return this.text;
+                }
             }
 
             /**
@@ -417,6 +442,10 @@ public class TripPlan
 
                 @JsonProperty("stayOn")
                 public Boolean stayOn;
+
+                public String toString() {
+                    return this.streetName;
+                }
 
                 // NOTE: not using elevation in my work...the String used to work with older
                 //       version of OTP, but no longer.  Jackson mentions something about an array
@@ -447,10 +476,24 @@ public class TripPlan
             @JsonProperty("fare")
             public FareDetail fare;
 
+            public String toString() {
+                String retVal = null;
+                if(this.fare != null)
+                    retVal = this.fare.toString();
+                return retVal;
+            }
+
             public static class FareDetail
             {
                 @JsonProperty("regular")
                 public Currency regular;
+
+                public String toString() {
+                    String retVal = null;
+                    if(this.regular != null)
+                        retVal = this.regular.toString();
+                    return retVal;
+                }
 
                 /**
                  * "regular":{"currency":{"symbol":"$","currency":"USD","currencyCode":"USD","defaultFractionDigits":2},"cents":250}}}
@@ -462,6 +505,7 @@ public class TripPlan
 
                     @JsonProperty("cents")
                     public Integer cents;
+
 
                     /**
                      * "currency":{"symbol":"$","currency":"USD","currencyCode":"USD","defaultFractionDigits":2}
