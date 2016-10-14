@@ -77,7 +77,7 @@ public class TripPlan
                 retVal += "\n\tPlan with " + this.itineraries.length + " itineraries:";
                 int n = 1;
                 for(Itinerary i : this.itineraries) {
-                    retVal += String.format("Itinerary #%d: %s %s\n", n, from.toString("FROM: "), to.toString("TO: "));
+                    retVal += String.format("Itinerary #%d: %s %s\n", n, this.from.toString("FROM: "), this.to.toString("TO: "));
                     retVal += i.toString();
                     retVal += "\n\n\n";
                     n++;
@@ -222,9 +222,11 @@ public class TripPlan
             public String toString() {
                 String retVal = "";
                 if(this.legs != null) {
-                    retVal += "\n\t\tItin with " + this.legs.length + " legs:";
-                    for(Leg l : this.legs)
-                        retVal += "\n\t\t\t: " + l.toString();
+                    int n = 1;
+                    for(Leg l : this.legs) {
+                        retVal += l.toString(String.format("\n\tLeg #%d of %d:", n++, this.legs.length));
+                        retVal += String.format("\n\t\t\t:");
+                    }
                 }
                 return retVal;
             }
@@ -332,19 +334,20 @@ public class TripPlan
             @JsonProperty("legGeometry")
             public LegGeometry legGeometry;
 
-            public String toString() {
+            public String toString(String title) {
                 String retVal = "";
-                retVal += String.format(this.from.toString("\n\tFROM "));
-                retVal += String.format(this.to.toString("\n\tTO "));
+                retVal += String.format("%s%s %s", title, this.from.toString("FROM: "), this.to.toString("TO: "));
                 return retVal;
+            }
+            public String toString() {
+                return this.toString("");
             }
 
             /** make route and headsign string */
             public String routeNameAndDestination(String sep)
             {
                 String retVal = this.routeName();
-                if(this.headsign != null && this.headsign.length() > 0)
-                {
+                if(this.headsign != null && this.headsign.length() > 0) {
                     retVal = retVal + sep + this.headsign;
                     retVal = retVal.trim();
                 }
