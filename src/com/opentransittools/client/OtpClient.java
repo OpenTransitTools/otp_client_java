@@ -150,7 +150,8 @@ public class OtpClient
         String path = Paths.get(file).toAbsolutePath().toString();
 
         TripPlan tp = TripPlan.planFromFile(OtpClient.jsonMapper(), path);
-        print(tp);
+        //print(tp);
+        System.out.print(tp.toString());
     }
 
     public static void print(TripPlan tp) throws Exception

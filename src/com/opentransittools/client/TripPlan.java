@@ -75,8 +75,13 @@ public class TripPlan
             String retVal = "";
             if(this.itineraries != null) {
                 retVal += "\n\tPlan with " + this.itineraries.length + " itineraries:";
-                for(Itinerary i : this.itineraries)
+                int n = 1;
+                for(Itinerary i : this.itineraries) {
+                    retVal += String.format("Itinerary #%d: %s %s\n", n, from.toString("FROM: "), to.toString("TO: "));
                     retVal += i.toString();
+                    retVal += "\n\n\n";
+                    n++;
+                }
             }
             return retVal;
         }
@@ -107,6 +112,17 @@ public class TripPlan
             @JsonProperty("zoneId")
             public String zoneId;
 
+            public String toString(String title) {
+                String retVal = "";
+                retVal += String.format("%s%s (%f, %f)", title, this.name, this.lon, this.lat);
+                if(stopId != null)
+                    retVal += stopId.toString("\n\t\t");
+                return retVal;
+            }
+            public String toString() {
+                return this.toString("");
+            }
+
             /**
              * old 0.10.x version:
              * stopId:{"agencyId":"TriMet","id":"10579"}
@@ -121,6 +137,15 @@ public class TripPlan
 
                 @JsonProperty("id")
                 public String id;
+
+                public String toString(String title) {
+                    String retVal = "";
+                    retVal += String.format("%sAgency: %s, Stop Id %s", title, this.agencyId, this.id);
+                    return retVal;
+                }
+                public String toString() {
+                    return this.toString("");
+                }
 
                 /**
                  // dummy constructor called when we get objects that will be mapped with @JsonProperty
@@ -307,6 +332,13 @@ public class TripPlan
             @JsonProperty("legGeometry")
             public LegGeometry legGeometry;
 
+            public String toString() {
+                String retVal = "";
+                retVal += String.format(this.from.toString("\n\tFROM "));
+                retVal += String.format(this.to.toString("\n\tTO "));
+                return retVal;
+            }
+
             /** make route and headsign string */
             public String routeNameAndDestination(String sep)
             {
@@ -341,7 +373,6 @@ public class TripPlan
 
                 return retVal;
             }
-
 
             /**
              * "notes":[{"text":"Caution!"}],
@@ -399,6 +430,7 @@ public class TripPlan
                 @JsonProperty("levels")
                 public Integer levels;
             }
+
         }
 
         /**
