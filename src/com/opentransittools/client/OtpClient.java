@@ -48,20 +48,7 @@ public class OtpClient
         try
         {
             ret_val = m_json.readValue(this.m_params.makeOtpUrl(), TripPlan.class);
-
-            // post process
-            for(TripPlan.Plan.Itinerary it : ret_val.plan.itineraries)
-            {
-                if(it != null)
-                for(TripPlan.Plan.Leg l : it.legs)
-                {
-                    if(l != null)
-                    {
-                        if(l.interlineWithPreviousLeg && it.transfers > 0)
-                            it.transfers--;
-                    }
-                }
-            }
+            ret_val.postProcess();
         }
         catch(Exception e)
         {
@@ -126,6 +113,7 @@ public class OtpClient
         {
             System.out.print("Start Planning...\n");
             TripPlan tp = c.planner();
+            tp.postProcess();
             System.out.print("...Done Planning\n");
             print(tp);
         }
@@ -150,6 +138,7 @@ public class OtpClient
         String path = Paths.get(file).toAbsolutePath().toString();
 
         TripPlan tp = TripPlan.planFromFile(OtpClient.jsonMapper(), path);
+        tp.postProcess();
         //print(tp);
         System.out.print(tp.toString());
     }

@@ -18,6 +18,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 public class TripPlan
 {
+    protected Boolean isNewOtp = false;
+
     @JsonProperty("requestParameters")
     public RequestParameters requestParameters;
     @JsonProperty("plan")
@@ -25,9 +27,35 @@ public class TripPlan
     @JsonProperty("error")
     public Error error;
 
-    public Boolean normalize()
-    {
-        return true;
+    /**
+     *
+     */
+    public Boolean postProcess() throws Exception {
+        Boolean success = true;
+
+        if(this.plan != null && this.plan.itineraries != null) {
+
+            // step 1: post process for calculating legs / ala interlines
+            for (Plan.Itinerary it : this.plan.itineraries) {
+                if (it != null && it.transfers != null && it.transfers > 0) {
+                    for (TripPlan.Plan.Leg l : it.legs) {
+                        if(l != null && l.interlineWithPreviousLeg)
+                            it.transfers--;
+                    }
+                }
+            }
+
+            // step 2: OTP 1.0 change seconds to milliseconds so it's the same as OTP 0.10.x
+            for(Plan.Itinerary it : this.plan.itineraries) {
+                if (it != null) {
+                    if (it.duration > 0 && it.duration < 100000) {
+                        it.duration = it.duration * 1000;
+                        this.isNewOtp = true;
+                    }
+                }
+            }
+        }
+        return success;
     }
 
     /**
