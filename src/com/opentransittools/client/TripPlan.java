@@ -28,14 +28,13 @@ public class TripPlan
     public Error error;
 
     /**
-     *
+     * this routine fixes up the itinerary
      */
     public Boolean postProcess() throws Exception {
         Boolean success = true;
 
 
         if(this.plan != null && this.plan.itineraries != null) {
-
 
             for (Plan.Itinerary it : this.plan.itineraries) {
                 if (it != null && it.legs != null) {
@@ -59,6 +58,17 @@ public class TripPlan
                             this.isNewOtp = true;
                             String z[] = l.routeId.split(":");
                             l.routeId = z[1];
+                        }
+
+                        // step 4: copy new 'alerts' over to the old 0.10.x 'notes' structure
+                        if(l.alerts != null && l.alerts.length > 0 && l.notes == null)
+                        {
+                            l.notes = new Plan.Leg.Note[l.alerts.length];
+                            for(int i = 0; i < l.alerts.length; i++) {
+                                Plan.Leg.Note n = new Plan.Leg.Note();
+                                n.text = l.alerts[i].alertDescriptionText.text;
+                                l.notes[i] = n;
+                            }
                         }
                     }
                 }
@@ -371,6 +381,9 @@ public class TripPlan
             @JsonProperty("notes")
             public Note notes[];
 
+            @JsonProperty("alerts")
+            public Alert alerts[];
+
             @JsonProperty("steps")
             public Step steps[];
 
@@ -452,6 +465,30 @@ public class TripPlan
                     return this.text;
                 }
             }
+
+            /**
+             * OLD: "alerts":["alertDescriptionText":{"translations":{"":"The westbound stop on NE Dekum at M L King is closed for construction.  Use stop at 6th."}, "someTranslation":"The westbound stop on NE Dekum at M L King is closed for construction.  Use stop at 6th."}, "alertUrl":{"translations":{"":"http://trimet.org/alerts/" }, "someTranslation":"http://trimet.org/alerts/"}, "effectiveStartDate":1473674400000}]
+             * NEW: "alerts":[{"alertDescriptionText":"The westbound stop on NE Dekum at M L King is closed for construction.  Use stop at 6th.", "alertUrl":"http://trimet.org/alerts/", "effectiveStartDate":1473674400000,
+             *
+             */
+            public static class Alert
+            {
+                @JsonProperty("alertDescriptionText")
+                public AlertText alertDescriptionText;
+
+                public static class AlertText {
+                    @JsonProperty("someTranslation")
+                    public String text;
+
+                    public AlertText() {
+                    }
+                    public AlertText(String a) {
+                        //System.out.print(a);
+                        this.text = a;
+                    }
+                }
+            }
+
 
             /**
              *       "steps":[
