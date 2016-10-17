@@ -35,16 +35,17 @@ public class TripPlan
 
         if(this.plan != null && this.plan.itineraries != null) {
 
+/*
             // step 1: post process for calculating legs / ala interlines
             for (Plan.Itinerary it : this.plan.itineraries) {
-                if (it != null && it.transfers != null && it.transfers > 0) {
+                if (it != null && it.legs != null && it.transfers != null && it.transfers > 0) {
                     for (TripPlan.Plan.Leg l : it.legs) {
                         if(l != null && l.interlineWithPreviousLeg)
                             it.transfers--;
                     }
                 }
             }
-
+*/
             // step 2: OTP 1.0 change seconds to milliseconds so it's the same as OTP 0.10.x
             for(Plan.Itinerary it : this.plan.itineraries) {
                 if (it != null) {
