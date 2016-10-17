@@ -33,25 +33,33 @@ public class TripPlan
     public Boolean postProcess() throws Exception {
         Boolean success = true;
 
+
         if(this.plan != null && this.plan.itineraries != null) {
 
-/*
-            // step 1: post process for calculating legs / ala interlines
+
             for (Plan.Itinerary it : this.plan.itineraries) {
-                if (it != null && it.legs != null && it.transfers != null && it.transfers > 0) {
-                    for (TripPlan.Plan.Leg l : it.legs) {
-                        if(l != null && l.interlineWithPreviousLeg)
-                            it.transfers--;
-                    }
-                }
-            }
-*/
-            // step 2: OTP 1.0 change seconds to milliseconds so it's the same as OTP 0.10.x
-            for(Plan.Itinerary it : this.plan.itineraries) {
-                if (it != null) {
-                    if (it.duration > 0 && it.duration < 100000) {
+                if (it != null && it.legs != null) {
+
+                    // step 1: OTP 1.0 change seconds to milliseconds so it's the same as OTP 0.10.x
+                    if (it.duration != null && it.duration > 0 && it.duration < 100000) {
                         it.duration = it.duration * 1000;
                         this.isNewOtp = true;
+                    }
+
+                    for (TripPlan.Plan.Leg l : it.legs) {
+                        if(l == null) continue;
+
+                        // step 2: for calculating number of transfers, remove any interline transfers (stay on board)
+                        if(l.interlineWithPreviousLeg != null && l.interlineWithPreviousLeg == true
+                         && it.transfers != null && it.transfers > 0)
+                            it.transfers--;
+
+                        // step 3: fix route id -- NEW OTP has stopId = "TriMet:2"
+                        if(l.routeId != null && l.routeId.contains(":")) {
+                            this.isNewOtp = true;
+                            String z[] = l.routeId.split(":");
+                            l.routeId = z[1];
+                        }
                     }
                 }
             }
@@ -189,7 +197,6 @@ public class TripPlan
                  */
                 public Stop(String agencyStopId)
                 {
-                    //isVersion_1_0 = true;
                     String z[] = agencyStopId.split(":");
                     this.agencyId = z[0];
                     this.id = z[1];
