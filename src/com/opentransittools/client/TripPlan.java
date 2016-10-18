@@ -354,6 +354,8 @@ public class TripPlan
             @JsonProperty("interlineWithPreviousLeg")
             public Boolean interlineWithPreviousLeg = false;
 
+            public String otpInterlineRouteName;
+
             @JsonProperty("routeId")
             public String routeId;
             @JsonProperty("routeShortName")
@@ -361,7 +363,7 @@ public class TripPlan
             @JsonProperty("routeLongName")
             public String routeLongName;
             @JsonProperty("route")
-            public String route;  // was otpInterlineRouteName;
+            public String route;
             @JsonProperty("routeType")
             public String routeType;
             @JsonProperty("headsign")

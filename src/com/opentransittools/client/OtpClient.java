@@ -130,10 +130,12 @@ public class OtpClient
             file = args[0];
         }
         else if (args[0].equals("new")) {
-            file = "src/com/opentransittools/test/new/zoo_ohsu.json";
+            //file = "src/com/opentransittools/test/new/zoo_ohsu.json";
+            file = "src/com/opentransittools/test/new/interline.json";
         }
         else {
-            file = "src/com/opentransittools/test/old/zoo_ohsu.json";
+            //file = "src/com/opentransittools/test/old/zoo_ohsu.json";
+            file = "src/com/opentransittools/test/old/interline.json";
         }
         String path = Paths.get(file).toAbsolutePath().toString();
 
