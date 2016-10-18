@@ -29,8 +29,8 @@ public class  ParamParserLegacyTM extends ParamParser
 
     public void setMode(String mode) {
         if(mode.equals("A"))       this.m_mode = "TRANSIT,WALK";
-        else if(mode.equals("B"))  this.m_mode = "BUSISH,WALK";
-        else if(mode.equals("T"))  this.m_mode = "TRAINISH,WALK";
+        else if(mode.equals("B"))  this.m_mode = "BUS,WALK";
+        else if(mode.equals("T"))  this.m_mode = "RAIL,TRAM,SUBWAY,FUNICULAR,GONDOLA,WALK";
         else                       this.m_mode = "TRANSIT,WALK";
     }
 
