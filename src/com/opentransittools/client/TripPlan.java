@@ -45,7 +45,8 @@ public class TripPlan
                         this.isNewOtp = true;
                     }
 
-                    for (TripPlan.Plan.Leg l : it.legs) {
+                    for(int i = 0; i < it.legs.length; i++) {
+                        TripPlan.Plan.Leg l = it.legs[i];
                         if(l == null) continue;
 
                         // step 2: for calculating number of transfers, remove any interline transfers (stay on board)
@@ -64,10 +65,20 @@ public class TripPlan
                         if(l.alerts != null && l.alerts.length > 0 && l.notes == null)
                         {
                             l.notes = new Plan.Leg.Note[l.alerts.length];
-                            for(int i = 0; i < l.alerts.length; i++) {
+                            for(int k = 0; i < l.alerts.length; k++) {
                                 Plan.Leg.Note n = new Plan.Leg.Note();
-                                n.text = l.alerts[i].alertDescriptionText.text;
-                                l.notes[i] = n;
+                                n.text = l.alerts[k].alertDescriptionText.text;
+                                l.notes[k] = n;
+                            }
+                        }
+
+                        // step 5: clean up the interline crap
+                        if(l.interlineWithPreviousLeg != null && l.interlineWithPreviousLeg) {
+                            int j = i - 1;
+                            if(j >= 0 && it.legs[j].routeId != null) {
+                                l.otpInterlineRouteName = it.legs[j].route;
+                                if(l.route != null && !l.route.equals(l.routeLongName))
+                                    l.routeLongName = l.route;
                             }
                         }
                     }
@@ -396,8 +407,10 @@ public class TripPlan
                 String retVal = "";
                 retVal += String.format("%s%s %s", title, this.from.toString("FROM: "), this.to.toString("TO: "));
                 retVal += String.format("\n\t\tStart %d End %d", startTime, endTime);
-                if(routeId != null)
+                if(routeId != null) {
                     retVal += String.format("\n\t\trouteId=%s, route=%s, routeShortName=%s, routeLongName=%s", routeId, route, routeShortName, routeLongName);
+                    retVal += String.format("\n\t\tinterline=%s, interlineRouteName=%s", interlineWithPreviousLeg, otpInterlineRouteName);
+                }
 
                 if(steps != null) {
                     String sstr = "\n\t\tsteps:";
