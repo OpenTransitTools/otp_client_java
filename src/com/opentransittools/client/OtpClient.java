@@ -131,11 +131,13 @@ public class OtpClient
         }
         else if (args[0].equals("new")) {
             //file = "src/com/opentransittools/test/new/zoo_ohsu.json";
-            file = "src/com/opentransittools/test/new/interline.json";
+            //file = "src/com/opentransittools/test/new/interline.json";
+            file = "src/com/opentransittools/test/new/short_walk.json";
         }
         else {
             //file = "src/com/opentransittools/test/old/zoo_ohsu.json";
-            file = "src/com/opentransittools/test/old/interline.json";
+            //file = "src/com/opentransittools/test/old/interline.json";
+            file = "src/com/opentransittools/test/old/short_walk.json";
         }
         String path = Paths.get(file).toAbsolutePath().toString();
 
