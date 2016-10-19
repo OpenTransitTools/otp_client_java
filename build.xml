@@ -95,12 +95,21 @@
             <arg value="new"/>
         </java>
     </target>
+    <target name="jdbnew" depends="jar">
+        <!-- RUN app by calling OTP via URL -->
+        <java classname="com.opentransittools.client.OtpClient" fork="false" classpathref="classpath">
+            <jvmarg  value="-Xdebug" />
+            <arg value="new"/>
+        </java>
+    </target>
     <target name="file" depends="jar">
         <!-- RUN app by calling OTP via URL -->
         <java classname="com.opentransittools.client.OtpClient" fork="false" classpathref="classpath">
             <arg value="src\com\opentransittools\test\new\pdx_zoo.json"/>
         </java>
     </target>
+
+
 
     <target name="clean-build" depends="clean,jar,complete-jar"/>
     <target name="main" depends="clean-build,run"/>
