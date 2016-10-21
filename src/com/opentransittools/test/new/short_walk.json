@@ -6,7 +6,7 @@
     "to":{"name":"Destination","lon":-122.67761,"lat":45.521095,"orig":"","vertexType":"NORMAL"},
     "itineraries":[
       {
-        f"duration":192,"startTime":1476906960000,"endTime":1476907152000,"walkTime":192,"transitTime":0,"waitingTime":0,
+        "duration":192,"startTime":1476906960000,"endTime":1476907152000,"walkTime":192,"transitTime":0,"waitingTime":0,
         "walkDistance":243.84971428456186,"walkLimitExceeded":false,"elevationLost":0.0,"elevationGained":0.0,"transfers":0,
         "tooSloped":false,
         "legs":[

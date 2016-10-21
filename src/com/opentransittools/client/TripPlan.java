@@ -403,10 +403,12 @@ public class TripPlan
             @JsonProperty("legGeometry")
             public LegGeometry legGeometry;
 
+
             public String toString(String title) {
                 String retVal = "";
                 retVal += String.format("%s%s %s", title, this.from.toString("FROM: "), this.to.toString("TO: "));
                 retVal += String.format("\n\t\tStart %d End %d", startTime, endTime);
+
                 if(routeId != null) {
                     retVal += String.format("\n\t\trouteId=%s, route=%s, routeShortName=%s, routeLongName=%s", routeId, route, routeShortName, routeLongName);
                     retVal += String.format("\n\t\tinterline=%s, interlineRouteName=%s", interlineWithPreviousLeg, otpInterlineRouteName);
@@ -422,8 +424,10 @@ public class TripPlan
                 if(notes != null) {
                     String nstr = "\n\t\tnotes:";
                     for (Note n : notes)
-                        nstr += "\n\t\t\t" + n.toString();
-                    retVal += nstr  + "\n";
+                        if(n != null) {
+                            nstr += "\n\t\t\t" + n.toString();
+                            retVal += nstr + "\n";
+                        }
                 }
                 return retVal;
             }
