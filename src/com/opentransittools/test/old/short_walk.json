@@ -1,1 +1,38 @@
-{"requestParameters":{"to":"","arriveBy":"false","fromPlace":"45.519067,-122.678678","from":"","date":"2016-10-19","mode":"TRANSIT,WALK","optimize":"QUICK","time":"12:56 pm","maxWalkDistance":"840","ui_date":"10/19/2016","toPlace":"45.521095,-122.677610","_dc":"1476907444671","maxTransfers":"3"},"plan":{"date":1476906960000,"from":{"name":"corner of Pioneer Square North (path) and Pioneer Courthouse/Southwest 6th Avenue (sidewalk)","stopId":null,"stopCode":null,"lon":-122.678678,"lat":45.519067,"arrival":null,"departure":null,"orig":null,"zoneId":null,"stopIndex":null},"to":{"name":"corner of Southwest 6th Avenue and Southwest Stark Street","stopId":null,"stopCode":null,"lon":-122.67761,"lat":45.521095,"arrival":null,"departure":null,"orig":null,"zoneId":null,"stopIndex":null},"itineraries":[{"duration":176000,"startTime":1476906960000,"endTime":1476907136000,"walkTime":176,"transitTime":0,"waitingTime":0,"walkDistance":224.73907738191892,"elevationLost":0.0,"elevationGained":4.600209712982178,"transfers":-1,"fare":null,"legs":[{"startTime":1476906960000,"endTime":1476907136000,"distance":224.73719768273148,"mode":"WALK","route":"","agencyName":null,"agencyUrl":null,"agencyTimeZoneOffset":0,"routeColor":null,"routeType":null,"routeId":null,"routeTextColor":null,"interlineWithPreviousLeg":null,"tripShortName":null,"tripBlockId":null,"headsign":null,"agencyId":null,"tripId":null,"from":{"name":"Southwest 6th Avenue","stopId":null,"stopCode":null,"lon":-122.6786411,"lat":45.5190963,"arrival":null,"departure":null,"orig":"","zoneId":null,"stopIndex":null},"to":{"name":"corner of Southwest 6th Avenue and Southwest Stark Street","stopId":null,"stopCode":null,"lon":-122.67761,"lat":45.521095,"arrival":1476907136000,"departure":1476907136000,"orig":"","zoneId":null,"stopIndex":null},"legGeometry":{"points":"imytGptwkVKEcBu@??SIKEcBw@ICKEIEeBw@","levels":null,"length":11},"notes":null,"alerts":null,"routeShortName":null,"routeLongName":null,"boardRule":null,"alightRule":null,"rentedBike":null,"duration":176000,"bogusNonTransitLeg":false,"intermediateStops":null,"steps":[{"distance":224.73719768273148,"relativeDirection":null,"streetName":"Southwest 6th Avenue","absoluteDirection":"NORTH","exit":null,"stayOn":false,"area":false,"bogusName":false,"lon":-122.6786411,"lat":45.5190963,"elevation":[{"first":0.0,"second":-7.116530895233154},{"first":10.0,"second":-7.1680474281311035},{"first":20.0,"second":-7.474094390869141},{"first":30.0,"second":-7.775710105895996},{"first":40.0,"second":-8.167229652404785},{"first":50.0,"second":-8.446419715881348},{"first":60.0,"second":-8.785689353942871},{"first":66.76517486572266,"second":-8.972402572631836},{"first":77.62759962120424,"second":-9.170872688293457},{"first":87.62759962120424,"second":-9.285792350769043},{"first":97.62759962120424,"second":-9.44211196899414},{"first":107.62759962120424,"second":-9.711166381835938},{"first":117.62759962120424,"second":-9.824870109558105},{"first":127.62759962120424,"second":-10.077515602111816},{"first":137.62759962120424,"second":-10.23946475982666},{"first":144.8245371822394,"second":-10.377717971801758},{"first":157.34344676504682,"second":-10.50790023803711},{"first":167.34344676504682,"second":-10.628890037536621},{"first":177.34344676504682,"second":-10.779090881347656},{"first":187.34344676504682,"second":-11.015953063964844},{"first":197.34344676504682,"second":-11.154863357543945},{"first":207.34344676504682,"second":-11.409128189086914},{"first":217.34344676504682,"second":-11.524700164794922},{"first":224.73719981680463,"second":-11.716740608215332}],"alerts":null}]}],"tooSloped":false}]},"error":null}
+{
+  "requestParameters":{
+    "to":"","arriveBy":"false","fromPlace":"45.519067,-122.678678","from":"","date":"2016-10-19","mode":"TRANSIT,WALK","optimize":"QUICK","time":"12:56 pm","maxWalkDistance":"840","ui_date":"10/19/2016","toPlace":"45.521095,-122.677610","_dc":"1476907444671","maxTransfers":"3"},
+  "plan":{
+    "date":1476906960000,
+    "from":{"name":"corner of Pioneer Square North (path) and Pioneer Courthouse/Southwest 6th Avenue (sidewalk)","stopId":null,"stopCode":null,"lon":-122.678678,"lat":45.519067,"arrival":null,"departure":null,"orig":null,"zoneId":null,"stopIndex":null},
+    "to":{"name":"corner of Southwest 6th Avenue and Southwest Stark Street","stopId":null,"stopCode":null,"lon":-122.67761,"lat":45.521095,"arrival":null,"departure":null,"orig":null,"zoneId":null,"stopIndex":null},
+    "itineraries":
+    [
+      {
+        "duration":176000,"startTime":1476906960000,"endTime":1476907136000,"walkTime":176,"transitTime":0,"waitingTime":0,"walkDistance":224.73907738191892,"elevationLost":0.0,"elevationGained":4.600209712982178,"transfers":-1,"fare":null,
+        "legs":[{
+            "startTime":1476906960000,"endTime":1476907136000,"distance":224.73719768273148,"mode":"WALK","route":"","agencyName":null,"agencyUrl":null,"agencyTimeZoneOffset":0,"routeColor":null,"routeType":null,"routeId":null,"routeTextColor":null,"interlineWithPreviousLeg":null,"tripShortName":null,"tripBlockId":null,"headsign":null,"agencyId":null,"tripId":null,
+            "from":{"name":"Southwest 6th Avenue","stopId":null,"stopCode":null,"lon":-122.6786411,"lat":45.5190963,"arrival":null,"departure":null,"orig":"","zoneId":null,"stopIndex":null},
+            "to":{"name":"corner of Southwest 6th Avenue and Southwest Stark Street","stopId":null,"stopCode":null,"lon":-122.67761,"lat":45.521095,"arrival":1476907136000,"departure":1476907136000,"orig":"","zoneId":null,"stopIndex":null},
+            "legGeometry":{"points":"imytGptwkVKEcBu@??SIKEcBw@ICKEIEeBw@","levels":null,"length":11},
+            "notes":null,"alerts":null,"routeShortName":null,"routeLongName":null,"boardRule":null,"alightRule":null,
+            "rentedBike":null,
+            "duration":176000,"bogusNonTransitLeg":false,"intermediateStops":null,
+            "tooSloped":false,
+            "steps":[
+              {
+                "distance":224.73719768273148, "relativeDirection":null,
+                "streetName":"Southwest 6th Avenue","absoluteDirection":"NORTH","exit":null,"stayOn":false,"area":false,
+                "bogusName":false,"lon":-122.6786411,"lat":45.5190963,
+                "elevation":[
+                  {"first":0.0,"second":-7.116530895233154},
+                  {"first":10.0,"second":-7.1680474281311035},{"first":20.0,"second":-7.474094390869141},
+                  {"first":30.0,"second":-7.775710105895996},{"first":40.0,"second":-8.167229652404785},
+                  {"first":50.0,"second":-8.446419715881348},{"first":60.0,"second":-8.785689353942871},
+                  {"first":66.76517486572266,"second":-8.972402572631836},{"first":77.62759962120424,"second":-9.170872688293457},
+                  {"first":87.62759962120424,"second":-9.285792350769043},{"first":97.62759962120424,"second":-9.44211196899414},{"first":107.62759962120424,"second":-9.711166381835938},{"first":117.62759962120424,"second":-9.824870109558105},{"first":127.62759962120424,"second":-10.077515602111816},{"first":137.62759962120424,"second":-10.23946475982666},{"first":144.8245371822394,"second":-10.377717971801758},{"first":157.34344676504682,"second":-10.50790023803711},
+                  {"first":167.34344676504682,"second":-10.628890037536621},{"first":177.34344676504682,"second":-10.779090881347656},{"first":187.34344676504682,"second":-11.015953063964844},{"first":197.34344676504682,"second":-11.154863357543945},{"first":207.34344676504682,"second":-11.409128189086914},{"first":217.34344676504682,"second":-11.524700164794922},{"first":224.73719981680463,"second":-11.716740608215332}],"alerts":null}
+              ]
+           }]
+      }
+    ]
+  },"error":null}
